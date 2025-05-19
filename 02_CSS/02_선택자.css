@@ -35,3 +35,35 @@ p {
   color: red;
   background-color: beige;
 }
+/* 7. 속성 선택자 */
+/* 정확히 일치 */
+div[name="name1"] {
+  background-color: pink;
+}
+/* 등호 앞에 물결 추가(~=): 단어가 포함되어 있는 지 확인하여 적용 */
+div[name~="name1"] {
+  background-color: yellow;
+}
+/* *부분 일치 */
+div[class*="-c"] {
+  color: red;
+}
+/* ^시작 일치: 'cl'로 시작을 하는지  */
+div[class^="cl"] {
+  background-color: blue;
+}
+/* 시작 일치 */
+div[class|="div"] {
+  background-color: cyan;
+}
+/* $ 끝 일지 */
+div[class$="div"] {
+  background-color: pink;
+}
+
+/* 8. 형제 선택자 */
+/* 동일한 부모를 가진 요소 중에
+#test2 이후에 등장하는 모든 형제 div선택(본인 제외) */
+#test2 ~ div {
+  background-color: beige;
+}
