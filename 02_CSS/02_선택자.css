@@ -67,3 +67,94 @@ div[class$="div"] {
 #test2 ~ div {
   background-color: beige;
 }
+/* #test2의 바로 뒤에 나오는 div만 선택 */
+#test2 + div {
+  background-color: yellow;
+}
+
+/* 9. 반응 선택자 */
+.area {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+/* :active 마우스를 눌렀을 때 */
+#active-test:active {
+  background-color: yellow;
+  color: red;
+}
+/* :hover 마우스를 올렸을 때 */
+#hover-test:hover {
+  background-color: cadetblue;
+  color: crimson;
+}
+/* input 요소에 포커스가 갔을 때 적용 */
+input[type="text"]:focus {
+  background-color: pink;
+}
+/* 체크박스에 체크 상태인 경우 */
+input[type="checkbox"]:checked {
+  width: 20px;
+  height: 20px;
+}
+/* button 클릭 가능한 경우 */
+button:enabled {
+  background-color: violet;
+}
+button:disabled {
+  background-color: darkgrey;
+}
+
+/* 10. 구조 선택자 */
+#test3 li:first-child {
+  background-color: salmon;
+}
+#test3 li:last-child {
+  background-color: skyblue;
+}
+/* nth-child(숫자, odd -홀수, even-짝수) */
+#test3 li:nth-child(even) {
+  background-color: darkcyan;
+}
+/* nth-child와의 차이점: child는 항목 전체 증 ()안에 해당하는 항목 선택
+   of-type은 일치하는 type에 해당하는 ()안에서 해당하는 항목 선택 */
+#test3 li:nth-of-type(5) {
+  color: white;
+}
+/* 지정()안에 li가 없으면 적용X
+   괄호 안에 3을 적었는데, 해당하는 3번째 항목에 li가 없으면 적용이 안된다는 소리 */
+#test3 li:nth-last-child(5) {
+  background-color: hotpink;
+}
+/* 무조건 type 체크 */
+#test3 li:nth-last-of-type(3) {
+  background-color: yellowgreen;
+}
+/* 11. 가상 요소 선택자 */
+#test4 p::before {
+  /* content가 필수임 */
+  content: "앞";
+  color: blue;
+  background-color: yellow;
+}
+#test4 p::after {
+  content: "뒤";
+  color: white;
+  background-color: black;
+}
+/* 12. 선택자 우선순위 */
+#test5 {
+  width: 200px;
+  height: 200px;
+}
+div.class5 {
+  background-color: pink !important;
+}
+div#test5 {
+  background-color: skyblue;
+}
+/* 우선 순위: !important
+   > 인라인 스타일(Style="")
+   > 아이디 선택자(#id)
+   > 클래스 선택자(.class)
+   > 태그 선택자 */
