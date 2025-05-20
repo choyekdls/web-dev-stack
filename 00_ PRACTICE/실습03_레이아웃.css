@@ -1,0 +1,133 @@
+body {
+  background-color: white;
+}
+#head {
+  border: solid white;
+  background-color: white;
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logo {
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: flex-start;
+}
+
+#flex {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+#flex a {
+  display: flex;
+  font-size: 16px;
+  padding: 5px;
+  justify-content: flex-end;
+}
+
+article {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+#section1 {
+  height: 100vh;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#head1 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#lorem1 {
+  font-size: 1.2rem;
+  line-height: 25px;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#section2 {
+  height: 100vh;
+  background-color: lightpink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#head2 {
+  font-size: 2rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+#lorem2 {
+  font-size: 1.2rem;
+  line-height: 25px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section3 {
+  background-color: lightyellow;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#head3 {
+  font-size: 2rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+#lorem3 {
+  font-size: 1.2rem;
+  line-height: 25px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top {
+  display: flex;
+  position: fixed;
+  border: solid rgb(0, 0, 0 0.9);
+  background-color: rgb(0, 0, 0, 0.9);
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  bottom: 30px;
+  right: 30px;
+}
