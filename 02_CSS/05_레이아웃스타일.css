@@ -95,3 +95,142 @@
 .radius2 {
   border-radius: 50%;
 }
+/* box-sizing */
+.box {
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  border: 10px solid;
+  background-color: lightcoral;
+  margin: 10px;
+}
+.box-content {
+  /* width의 값은 width+padding+border
+     height 값도 동일하게 계산됨 */
+  box-sizing: box-content;
+}
+.box-border {
+  /* width의 값은 위에 설정한 값 그대로 적용됨(이미 padding+border 포함되어 있기 때문임*/
+  box-sizing: border-box;
+}
+/* display */
+.display {
+  background-color: pink;
+  padding: 10px;
+  margin: 5px;
+  width: 150px;
+  height: 70px;
+}
+.display-inline {
+  /* 텍스트만큼만 자리를 잡음 */
+  display: inline;
+}
+.display-block {
+  display: block;
+}
+.display-inline-block {
+  display: inline-block;
+}
+/* float */
+.float {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  background-color: skyblue;
+  text-align: center;
+  line-height: 80px;
+}
+/* position-box */
+.position-box {
+  width: 100px;
+  height: 100px;
+}
+/* position */
+#outer {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  background-color: #f4f4f4;
+  /* overflow:auto 넣으면 스크롤 하면서 한계점에 도달했을 때 위치가 고정됨; */
+}
+
+#relative {
+  /* 본인의 현재 위치에 위치를 조정함 */
+  background: orange;
+  position: relative;
+  /* relative 속성: top, bottom, left, right */
+  bottom: 100px;
+  left: -50px;
+  right: 500px;
+}
+#absolute {
+  /* 시작점이 브라우저의 시작점 */
+  /* 부모한테 position relative가 있다면 해당 부분이 시작점이 됨
+     없다면 시작점은 브라우저의 시작점 */
+  background-color: greenyellow;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+#fixed {
+  /* 약간 홈페이지 팝업창 같은 느낌이네, 헤더*/
+  background-color: red;
+  position: fixed;
+  right: 20px;
+  top: 30px;
+}
+#sticky {
+  /* 강제적으로 조건을 만들어줘야함 */
+  background-color: lightblue;
+  position: sticky;
+  top: 0;
+}
+/* visibility */
+.visibility {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: lightgoldenrodyellow;
+  display: inline-block;
+}
+#vis2 {
+  visibility: visible;
+}
+#vis1 {
+  visibility: hidden;
+}
+#dis1 {
+  display: none;
+}
+
+#z-outer {
+  width: 200px;
+  height: 200px;
+  background-color: aquamarine;
+  position: relative;
+}
+.z-index {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  opacity: 0.6;
+}
+#z-index1 {
+  background-color: lightcoral;
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+}
+#z-index2 {
+  background-color: greenyellow;
+  z-index: 2;
+  top: 40px;
+  left: 40px;
+}
+#z-index3 {
+  background-color: lightseagreen;
+  z-index: 9999;
+  /* z-index 숫자가 커질 수록 맨 위로
+     -(마이너스)까지 쓸 수 있음 */
+}
