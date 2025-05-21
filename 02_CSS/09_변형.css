@@ -1,0 +1,119 @@
+section {
+  display: flex;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  background-color: darkolivegreen;
+  color: white;
+  line-height: 150px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: auto;
+}
+.transition {
+  background-color: beige;
+  /* transition: all 10s; */
+  /* all부분은 바꿀 부분을 넣어주면 됨 
+     all을 원하지 않는다면, 항목 명 따로따로 넣으면 됨(ex.backgroud-color)*/
+  /* property:속성 명시, dutation: 전환 시간, timing Function: 변환 속도 곡선, delay: 전환 시간 지연 시간 */
+  transition-property: all;
+  transition-duration: 2s;
+  transition-timing-function: ease-in-out;
+  /* fucntion은 ease-in-out,liner자주 씀 */
+  /* transition-delay: 1s; */
+  /* 위의 전체 내용이 이 한 줄이랑 같음
+     property - duration - timing function - delay */
+  transition: all 2s ease-in-out 1;
+}
+
+.transition:hover {
+  background-color: lightseagreen;
+  font-size: 2rem;
+  /* scale: 확대 
+     deg: 각도*/
+  transform: scale(1.5) rotate(15deg);
+  border-radius: 50%;
+}
+
+/* transform */
+.transform-scale {
+  background: cornflowerblue;
+}
+.transform-scale:hover {
+  /* sclae:크기 확대 */
+  transform: scale(1.2);
+}
+
+.transform-rotate {
+  background-color: orange;
+}
+.transform-rotate:hover {
+  /* rotate: 회전 */
+  transform: rotate(45deg);
+}
+.transform-translate {
+  background-color: mediumaquamarine;
+}
+.transform-translate:hover {
+  /* translate: 이동(x,y) */
+  transform: translate(-40px, -20px);
+}
+.transform-skew {
+  background-color: khaki;
+}
+.transform-skew:hover {
+  /* skew: 기울이기(x,y) */
+  transform: skew(10deg, 20deg);
+}
+/* animation */
+@keyframes bounce {
+  0% {
+    transform: translate(0);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+}
+
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+.animation-once {
+  background-color: crimson;
+  /* animation: 애니매이션명 지속시간 속도곡선 횟수(얼만큼 재생할 것인가)*/
+  animation: bounce 1s ease-in-out 1;
+}
+.animation-alternate {
+  background-color: indigo;
+  animation: bounce 1s ease-in-out infinite alternate;
+}
+.animation-reverse {
+  background-color: darkorchid;
+  animation: bounce 10s ease-in-out infinite reverse;
+}
+.animation-paused {
+  background-color: mediumpurple;
+  animation: bounce2 2s linear infinite;
+}
+.animation-paused:hover {
+  animation-play-state: paused;
+}
+.perspective-container {
+  perspective: 600px;
+}
+.perspective-container .box {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.perspective-container .box:hover {
+  transform: rotateY(180deg);
+}
