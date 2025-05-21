@@ -1,6 +1,10 @@
 body {
   background-color: white;
 }
+
+header {
+}
+
 #head {
   border: solid white;
   background-color: white;
@@ -28,6 +32,8 @@ body {
 #flex a {
   display: flex;
   font-size: 16px;
+  text-decoration: none;
+  color: black;
   padding: 5px;
   justify-content: flex-end;
 }
@@ -118,6 +124,7 @@ article {
 .top {
   display: flex;
   position: fixed;
+  text-decoration: none;
   border: solid rgb(0, 0, 0 0.9);
   background-color: rgb(0, 0, 0, 0.9);
   color: white;
