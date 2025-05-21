@@ -1,0 +1,48 @@
+/* background-color */
+#bc {
+  background-color: lightblue;
+}
+/* background-clip */
+.div-test {
+  background-color: peachpuff;
+  /* background라고만 입력해도 무방함 */
+  padding: 30px;
+  border: 5px dashed orange;
+  margin-bottom: 20px;
+}
+#bc1 {
+  /* content */
+  background-clip: content-box;
+}
+#bc2 {
+  /* content+padding */
+  background-clip: padding-box;
+}
+#bc3 {
+  /* content+padding+border */
+  background-clip: border-box;
+  /* border까지 색상을 채우는 것이 기본임 */
+}
+/* 배경 이미지 테스트 */
+#test {
+  width: 400px;
+  height: 300px;
+  border: 2px solid;
+
+  background-image: url(assets/bg.jpg);
+  /* size: 이미지 크기 조절 px, contain, cover
+       cover가 많이 쓰인데 */
+  background-size: cover;
+  /* px/contain 도 채우는 도구지만 바둑판처럼 채워짐
+       cover는 내가 위에서 지정에 크기에 딱 맞게 */
+  /* repeat:반복 여부 설정 */
+  background-repeat: no-repeat;
+  /* repeat-x: x축으로만 반복
+       repeat-y: y축으로만 반복
+       no-repeat: 반복X */
+  background-position: bottom right;
+  /* position: 이미치 위치 설정 center */
+  background-attachment: fixed;
+  /* attachment: 스크롤 여부 확인 */
+  /* 순서: background: color image position/size repeat attachment */
+}
