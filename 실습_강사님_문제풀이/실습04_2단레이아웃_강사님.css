@@ -1,0 +1,66 @@
+:root {
+  /* 변수 */
+  --main-width: 250px;
+  --main-color: rgba(161, 114, 114, 0.5);
+}
+header {
+  position: fixed;
+  background-color: var(--main-color);
+  background-image: url(02_CSS/assets/background.jpg);
+  background-blend-mode: color;
+  background-position: center;
+  background-size: cover;
+  width: var(--main-width);
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 4rem;
+  padding-top: 20px;
+  /* text-decoration: underline; */
+  border-bottom: 3px solid white;
+  padding-inline: 10px;
+  /* 글자보다 선을 더 길게 */
+}
+
+header nav {
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+header nav a {
+  color: white;
+  text-decoration: underline;
+}
+
+main {
+  padding: 10px;
+  padding-left: calc(var(--main-width) + 20px);
+  text-align: center;
+}
+
+main h2 {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+main img {
+  width: 100%;
+  max-width: 400px;
+  /* 최대 넓이 지정하기 */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+main p {
+  line-height: 1.2;
+  text-align: justify;
+}
