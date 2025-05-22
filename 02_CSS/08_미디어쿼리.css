@@ -3,6 +3,7 @@
 }
 
 /* max-width는 데스크탑 기준 */
+/* max는 화면을 줄일 때 변화줄 수 있음 */
 @media (max-width: 1000px) {
   /* 최대 1000px부터 반영 */
   .response-color {
@@ -16,6 +17,7 @@
   }
 }
 /* min-width는 모바일 기준 */
+/* min은 화면을 늘릴 때 변화줄 수 있음 */
 .response-color2 {
   background-color: lightgreen;
 }
