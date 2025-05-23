@@ -6,6 +6,15 @@
     <title>변수 & 연산자 연습문제</title>
   </head>
   <body>
+    <!-- 
+    변수 명명 규칙
+    1) 문자, 숫자, 기호는 $,_만 사용
+    2) 첫 글자에는 숫자 금지
+    3) 예약어(const, if, switch...) 금지
+    4) 표기법대로 사용 - camelCase(낙타표기법) ex) userid -> userId
+    5) 상수(const로 표시한 것 X, 진짜로 바꾸면 안되는)는 대문자 + SNAKE_CASE(언더바 표기법)
+    -->
+
     <h1>변수 & 연산자 연습문제</h1>
     <ol style="line-height: 2">
       <li>
@@ -16,6 +25,12 @@
           const lb = 2.21;
 
           console.log(kg * lb);
+
+          /*
+          const kg = 60;
+          const il = kg*2.2 ;
+          console.log(lb);
+          */
         </script>
       </li>
 
@@ -25,8 +40,13 @@
           const m2 = 99;
           // Q4: 여기에 코드를 작성하세요
           const num1 = 0.3;
-
           console.log(m2 * num1);
+
+          /*
+          const m2 =  99;
+          const py = m2 * 0.3
+          console.log(py)
+          */
         </script>
       </li>
 
@@ -37,7 +57,8 @@
           const lower = 14;
           const height = 4;
           // Q4: 여기에 코드를 작성하세요
-          console.log(((upper + lower) / 2) * height);
+          const area = ((upper + lower) / 2) * height;
+          console.log(area);
         </script>
       </li>
 
@@ -47,9 +68,13 @@
           // Q4: 여기에 코드를 작성하세요
           const 예금 = 12000000;
           const 연이율 = 0.04;
+          const 월이자 = (예금 * 연이율) / 12;
 
           console.log((예금 * 연이율) / 12);
         </script>
+
+        /* const deposit = 12000000; const rate = 0.04; const monthly = (deposit
+        * rate) / 12; console.log(monthly); */
       </li>
 
       <li>
@@ -58,8 +83,9 @@
           // Q5: 여기에 코드를 작성하세요
           const ty = 2025;
           const ag = 55;
-
-          console.log(ty - ag);
+          const birth = ty - ag;
+          // or ty - ag + 1도 가능
+          console.log(birth);
         </script>
       </li>
 
@@ -72,9 +98,11 @@
           const 돈 = 15000;
           const 최대 = parseInt(돈 / 아아);
           const 잔돈 = 돈 - 아아 * 최대;
+          // or 잔동 = 돈 % 아아
 
           console.log(최대);
           console.log(잔돈);
+          console.log(`최대 ${최대}잔, 잔돈은 ${잔돈}원`);
         </script>
       </li>
 
@@ -94,6 +122,18 @@
           console.log(서비스음료);
           console.log(계산이필요한음료);
           console.log(양꼬치 * 꼬치인분);
+
+          /*
+          const food = 12000
+          const drink = 2000
+          const foodNum = 64
+          const dringNum = 6
+          const service = parseInt(foodNum / 10)
+          const total = food * (foodNum + drinkNum - service)
+
+          console.log(total)
+          
+          */
         </script>
       </li>
 
@@ -102,8 +142,10 @@
         <script>
           // Q8: 여기에 코드를 작성하세요
           const number = 73;
-          const 십의자리 = parseInt(73 / 10);
-          const 일의자리 = parseInt(73 % 10);
+          const 십의자리 = parseInt(number / 10);
+          const 일의자리 = parseInt(number % 10);
+          //const sum = 십의자리 + 일의자리
+          // console.log(sum)
 
           console.log(십의자리 + 일의자리);
         </script>
@@ -132,6 +174,8 @@
           // Q10: 여기에 코드를 작성하세요
           console.log(100 == "100");
           console.log(100 === "100");
+          // == true
+          // ** === false(typeof까지 확인) **
         </script>
       </li>
     </ol>
