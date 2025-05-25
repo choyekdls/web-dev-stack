@@ -12,6 +12,10 @@
         1부터 10까지 숫자를 출력하는 반복문을 작성하시오.
         <script>
           // Q1
+
+          for (i = 0; i <= 10; i++) {
+            console.log(i);
+          }
         </script>
       </li>
 
@@ -19,6 +23,12 @@
         구구단 2단을 출력하시오.
         <script>
           // Q2
+          let i = 1;
+
+          while (i <= 9) {
+            console.log(`2 x ${i} = ${2 * i}`);
+            i++;
+          }
         </script>
       </li>
 
@@ -26,6 +36,16 @@
         1부터 사용자에게 입력받은 숫자까지의 합을 출력하시오. (prompt 사용)
         <script>
           // Q3
+
+          let input = prompt("숫자를 입력하세요");
+          let number = input;
+          let sum = 0;
+
+          for (let i = 1; i <= number; i++) {
+            sum += i;
+          }
+
+          console.log(sum);
         </script>
       </li>
 
@@ -33,6 +53,10 @@
         1부터 100까지의 수 중 3의 배수만 출력하시오.
         <script>
           // Q4
+
+          for (i = 1; i <= 100; i++) {
+            if (i % 3 === 0) console.log(i);
+          }
         </script>
       </li>
 
@@ -41,6 +65,15 @@
         <script>
           const numbers = [12, 7, 9, 20, 33, 16];
           // Q5
+
+          let even = 0;
+
+          while (even <= numbers.length) {
+            if (numbers[even] % 2 === 0) {
+              console.log(numbers[even]);
+            }
+            even++;
+          }
         </script>
       </li>
 
@@ -49,6 +82,15 @@
         <script>
           const words = ["오므라이스", "라면", "불고기", "된장찌개", "김밥"];
           // Q6
+
+          let al = 0;
+
+          while (al <= words.length) {
+            if (words[al].length >= 3) {
+              console.log(words[al]);
+            }
+            al++;
+          }
         </script>
       </li>
 
@@ -57,6 +99,15 @@
         <script>
           const nums = [3, 45, 21, 99, 18, 77];
           // Q7
+
+          let max = 0;
+
+          while (max >= nums.length) {
+            if (nums[max] > nums.length) {
+              console.log(nums[max]);
+            }
+            max++;
+          }
         </script>
       </li>
 
@@ -65,6 +116,18 @@
         멈추도록 구현하시오.
         <script>
           // Q8
+
+          for (let i = 1; i <= 10; i++) {
+            if (i === 7) {
+              break;
+            }
+
+            if (i % 2 === 0) {
+              continue;
+            }
+
+            console.log(i);
+          }
         </script>
       </li>
 
@@ -77,6 +140,29 @@
         - 정답을 맞추면 시도 횟수와 함께 종료 메시지를 출력하시오.
         <script>
           const target = Math.floor(Math.random() * 100) + 1; // 1~100 랜덤 숫자
+
+          let attempts = 0;
+          let guess;
+
+          while (true) {
+            guess = prompt("1부터 100 사이 숫자를 입력하세요:");
+            if (guess === null) {
+              console.log("게임을 종료합니다.");
+              break;
+            }
+
+            guess = Number(guess);
+            attempts++;
+
+            if (guess === target) {
+              console.log(`정답입니다! 시도 횟수: ${attempts}회`);
+              break;
+            } else if (guess > target) {
+              console.log("너무 큽니다.");
+            } else {
+              console.log("너무 작습니다.");
+            }
+          }
         </script>
       </li>
     </ol>
