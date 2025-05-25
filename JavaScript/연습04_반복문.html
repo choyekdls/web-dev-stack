@@ -43,10 +43,6 @@
 
           for (let i = 1; i <= number; i++) {
             sum += i;
-<<<<<<< HEAD
-            console.log(sum);
-=======
->>>>>>> dec7654cb89d923b933f5e12772c4db819a994a0
           }
 
           console.log(sum);
@@ -122,12 +118,11 @@
           // Q8
 
           for (let i = 1; i <= 10; i++) {
-            if (i === 7) {
-              break;
-            }
-
             if (i % 2 === 0) {
               continue;
+            }
+            if (i <= 7) {
+              break;
             }
 
             console.log(i);
@@ -144,22 +139,19 @@
         - 정답을 맞추면 시도 횟수와 함께 종료 메시지를 출력하시오.
         <script>
           const target = Math.floor(Math.random() * 100) + 1; // 1~100 랜덤 숫자
-<<<<<<< HEAD
           console.log(target);
-=======
->>>>>>> dec7654cb89d923b933f5e12772c4db819a994a0
 
           let attempts = 0;
           let guess;
+          let result = guess;
 
           while (true) {
             guess = prompt("1부터 100 사이 숫자를 입력하세요:");
-            if (guess === null) {
+            if (guess === result) {
               console.log("게임을 종료합니다.");
               break;
             }
 
-            guess = Number(guess);
             attempts++;
 
             if (guess === target) {
