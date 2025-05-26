@@ -13,7 +13,7 @@
         <script>
           // Q1
 
-          for (i = 0; i <= 10; i++) {
+          for (i = 1; i <= 10; i++) {
             console.log(i);
           }
         </script>
@@ -29,6 +29,11 @@
             console.log(`2 x ${i} = ${2 * i}`);
             i++;
           }
+
+          /*
+          for(let i = 1; i <= 9; i++) {
+          console.log(`2 x ${i} = S{2 * i}`)}
+          */
         </script>
       </li>
 
@@ -37,7 +42,7 @@
         <script>
           // Q3
 
-          let input = prompt("숫자를 입력하세요");
+          let input = Number(prompt("숫자를 입력하세요"));
           let number = input;
           let sum = 0;
 
@@ -46,6 +51,13 @@
           }
 
           console.log(sum);
+
+          // const input = Number(prompt("숫자를 입력하세요"))
+          // total = 0;
+          // for (let i = 1; i <= input; i++) {
+          // total += i;
+          // }
+          // console.log("total :" total)
         </script>
       </li>
 
@@ -74,6 +86,12 @@
             }
             even++;
           }
+
+          /*
+          for(let i = 0; i < numbers.length; i++) {
+          if (i % 2 === 0)
+          console.log(numbers[i])}
+          */
         </script>
       </li>
 
@@ -85,12 +103,15 @@
 
           let al = 0;
 
-          while (al <= words.length) {
-            if (words[al].length >= 3) {
-              console.log(words[al]);
-            }
-            al++;
+          for (let i = 0; i < words.length; i++) {
+            if (words[i].length >= 3) console.log(words[i]);
           }
+
+          /*
+          for(let i = 0; i <words.length; i++) {
+          if(words[i].length >= 3)
+          console.log(words[i])}
+          */
         </script>
       </li>
 
@@ -108,6 +129,25 @@
             }
             max++;
           }
+
+          /* 
+          let max = nums[0];
+          for(let i = 1; i<num.length; i++) {
+          if(nums[i] > max) max = nums[i]       
+          }console.log("가장 큰 숫자 : ", max)
+            */
+
+          /*
+          //sort
+          nums.sort((a,b) => a-b);
+          console.log(nums[nums.length - 1]);
+
+          nums.sort((a,b) => b-a);
+          console.log(nums[0]);
+
+          //Math.max
+          console.log(Math.max(...nums))
+          */
         </script>
       </li>
 
@@ -118,14 +158,9 @@
           // Q8
 
           for (let i = 1; i <= 10; i++) {
-            if (i % 2 === 0) {
-              continue;
-            }
-            if (i <= 7) {
-              break;
-            }
-
+            if (i % 2 === 0) continue;
             console.log(i);
+            if (i === 7) break;
           }
         </script>
       </li>
@@ -140,29 +175,35 @@
         <script>
           const target = Math.floor(Math.random() * 100) + 1; // 1~100 랜덤 숫자
           console.log(target);
-
-          let attempts = 0;
-          let guess;
-          let result = guess;
+          let count = 0;
 
           while (true) {
-            guess = prompt("1부터 100 사이 숫자를 입력하세요:");
-            if (guess === result) {
-              console.log("게임을 종료합니다.");
-              break;
-            }
-
-            attempts++;
-
-            if (guess === target) {
-              console.log(`정답입니다! 시도 횟수: ${attempts}회`);
-              break;
-            } else if (guess > target) {
-              console.log("너무 큽니다.");
+            count++;
+            const answer = Number(prompt("1~100까지 숫자를 입력해주세요"));
+            if (answer > target) {
+              console.log("너무 큽니다");
+            } else if (answer < target) {
+              console.log("너무 작습니다");
             } else {
-              console.log("너무 작습니다.");
+              console.log(`${count}번 만에 성공!`);
+              break;
             }
           }
+
+          /* 
+          while (true) {
+            count++;
+            const answer = Number(prompt("1~100까지 숫자를 입력해주세요"));
+            if (answer > target) {
+              alert("너무 큽니다");
+            } else if (answer < target) {
+              alert("너무 작습니다");
+            } else {
+              console.log(`${count}번 만에 성공!`);
+              break;
+            }
+          }
+          */
         </script>
       </li>
     </ol>
