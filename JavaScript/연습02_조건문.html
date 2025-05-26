@@ -13,7 +13,7 @@
         <script>
           // Q1: 여기에 코드를 작성하세요
           const username = "admin";
-          if (username == "admin") {
+          if (username === "admin") {
             console.log("관리자입니다");
           }
         </script>
@@ -52,9 +52,9 @@
         출력하시오.
         <script>
           // Q4: 여기에 코드를 작성하세요
-          const age = 25;
+          const age = 80;
 
-          if (65 < age && age < 8) {
+          if (65 < age || age < 8) {
             console.log("무료");
           } else {
             console.log("10,000원");
@@ -78,6 +78,44 @@
           } else if (mon > 0 && mon > 11) {
             console.log("겨울");
           }
+
+          // 아래의 넘버는 String을 Number로 변환해줌
+          /*const month = Number(prompt("몇 월입니까? (숫자만 입력해주세요)"))
+            if(3<=mon && mon <= 5){
+            console.log("봄)
+          }
+            else if (6<=mon && mon <= 8) {
+            console.log("여름");
+          } else if (9<=mon && mon <=11) {
+            console.log("가을");
+          } else if (mon ===12||mon===1||mon===2) {
+            console.log("겨울")         
+          */
+
+          /*
+           switch(mon) {
+           case 3: console.lpg("봄")
+           case 4:
+           case 5:
+           console.lpg("봄")
+           break;
+           case 6:
+           case 7:
+           case 8:
+           console.lpg("여름")
+           break;
+           case 9:
+           case 10:
+           case 11:
+           console.lpg("가을")
+           break;
+           case 12:
+           case 1:
+           case 2:                        
+           }console.lpg("겨울")
+           break;
+
+*/
         </script>
       </li>
 
@@ -88,7 +126,7 @@
           // Q6: 여기에 코드를 작성하세요
           const score = 99;
 
-          if (score >= 90) {
+          if (score >= 90 && score <= 100) {
             console.log("A");
           } else if (score >= 80) {
             console.log("B");
@@ -131,6 +169,29 @@
               console.log("일요일");
               break;
           }
+
+          /*
+          const number2 = Number(prompt ("숫자를 입력하세요"));
+          let day;
+          else if(number2 ===1) day="월"
+          elseif(number2 ===2) day="화"
+          elseif(number2 ===3) day="수"
+          else if(number2 ===4) day="목"
+          elseif(number2 ===5) day="금"
+          else if(number2 ===6) day="토"
+          else if(number2 ===7) day="일"
+          // undefined요일이라고 출력되는 것을 방지하기 위해
+          if(day !== undefined) console.log(`${day}요일`);
+          else alert("숫자를 잘못 입력하셨습니다. 1~7까지 입력해주세요")
+
+          // 배열(!!이해가 필요함!!)
+          const days = ["월", "화", "수", "목", "금", "토", "일"]
+
+          // days[0]: 월, number2 : 1
+          // days[1]: 화, number2 : 2
+          const result = days[number2 - 1];
+          console.log(`${result !== undefined ? result + "요일" : ""}`)
+          */
         </script>
       </li>
 
@@ -152,6 +213,24 @@
           } else if (result == num1 / num2) {
             console.log("두 수의 나눗셈 값");
           }
+
+          /*
+          const num1 = Number(prompt("숫자1 입력"))
+          const num2 = Number(prompt("숫자2 입력"))
+          const op =prompt("연산자 입력")
+          let result ;
+          switch(op) {
+          case'+': result = num1 + num2
+          break;
+          case'-': result = num1 - num2
+          break;
+          case'*': result = num1 * num2
+          break;
+          case'/': result = num1 / num2
+          break;
+          }
+          console.log(`${num1}${op}${num2}=${result}`)
+          */
         </script>
       </li>
 
@@ -175,6 +254,8 @@
         3개의 수 중 가장 큰 수를 출력하시오.
         <script>
           // Q10: 여기에 코드를 작성하세요
+
+          // (!!이건 완전 문제 이해를 잘못한 듯!!)
           const max = 100;
 
           switch (max) {
@@ -187,6 +268,18 @@
             case 100:
               console.log("max");
           }
+
+          /*
+          const num1 = 56;
+          const num2 = 86;
+          const num3 = 43;
+          let max =  num2;
+
+          if (num2 < num1) max = num4;
+          if (max < num3) max = num5;
+          console.log("최대값: ", max)
+
+          */
         </script>
       </li>
 
@@ -205,7 +298,20 @@
             console.log("둘 다");
           } else if (number % 3 !== 0 && number % 3 !== 0) {
             console.log("어떤 것도 아님");
+          } // else (console.log("어떤 것도 아님"))으로 변경해도 문제가 없나?(문제 없음/ 진행 가능)
+
+          /* 
+          if(number % 3 === 0) {
+          if(number %5 === 0) {
+          console.log(" 둘 다! ")
           }
+          else {console.log("3의 배수!")
+          } else {
+          if (number % 5 === 0) {
+          console.log("5의 배수")} 
+          } else {
+           console.log("둘 다 아님")}
+          */
         </script>
       </li>
 
@@ -215,7 +321,7 @@
           // Q12: 여기에 코드를 작성하세요
           let grade = 88;
 
-          if (0 < grade < 100) {
+          if (0 < grade && grade < 100) {
             console.log("0~100사이가 맞아용");
           } else {
             console.log("0~100사이가 아니에용");
@@ -233,6 +339,7 @@
           if (rint4 % 2 == 0) {
             console.log("짝수");
           } else if (rint4 % 2 == 1) {
+            //else로 바꾸어도 되겠다
             console.log("홀수");
           }
         </script>
