@@ -36,6 +36,9 @@
 
           scores.push(30, 50);
           console.log(scores);
+
+          //scores.splice(0, 5, 30, 50);
+          console.log(scores);
         </script>
       </li>
 
@@ -50,6 +53,9 @@
 
           const [F1, F2, F3, F4, F5] = music;
           console.log([F5]);
+
+          //console.log(music[music.length - 1])
+          //console.log(music.slice(4))
         </script>
       </li>
 
@@ -91,6 +97,9 @@
           // [1, 2, 3]
           const newdup = new Set(dupArr);
           console.log(newdup);
+
+          // const newdup = [...new Set(dupArr)]
+          // 바로 배열로 변경하여 출력 가능함
 
           const newdupArr = [...newdup];
           console.log(newdupArr);
