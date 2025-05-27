@@ -1,3 +1,31 @@
 body {
+  margin: 0;
+  padding: 0;
   background-color: hotpink;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+#date {
+  font-size: 3rem;
+}
+
+#clock {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+#countdown {
+  font-size: 2.5rem;
+}
+
+#quote {
+  font-size: 2rem;
 }
