@@ -104,7 +104,7 @@
       const arr2 = []; //배열은 빈 배열에서 시작
       arr2.push(1);
       arr2[1] = 5; /// 값 추가
-      arr2[0] = 3; // 값 수정
+      arr2[0] = 3; // 값 수정: 원래 arr2[0] 자리는 1이 있었음
       console.log(arr2);
     </script>
 
@@ -144,9 +144,8 @@
       console.log([...uniqueArr, ...arr4]);
 
       //거꾸로도 바꿀 수 있나?
-
       // 배열 -> 문자열
-      JSON.stringify(배열);
+      JSON.stringify(uniqueArr);
     </script>
   </body>
 </html>
