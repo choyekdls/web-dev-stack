@@ -39,7 +39,28 @@
       }
 
       button {
-        margin: 30px;
+        width: 150px;
+        height: 60px;
+        margin: 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+      }
+
+      #click {
+        background-color: #ed833a;
+        color: #005456;
+      }
+
+      #restart {
+        background-color: #005456;
+        color: #ed833a;
+      }
+
+      #cong {
+        font-weight: bold;
+        font-style: italic;
       }
     </style>
   </head>
@@ -59,13 +80,13 @@
     </section>
 
     <section id="button">
-      <button id="click">Click</button>
+      <button id="click">Click(<span id="count">0</span>)</button>
       <button id="restart">Restart</button>
     </section>
 
     <!-- 게임 끝나면 뜨게하기 -->
     <section id="cong">
-      <h3>축하합니다! 다시 시작하려면 재시작 버튼을 눌러주세요!</h3>
+      <h2>축하합니다! 다시 시작하려면 재시작 버튼을 눌러주세요!</h2>
     </section>
   </body>
 </html>
