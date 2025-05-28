@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="실습06_그림맞추기.js"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 30px;
+      }
+
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 15px;
+      }
+
+      button {
+        margin: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>그림 맞추기 게임</h1>
+      <h3>
+        버튼을 클릭하면, 그림이 출력 됩니다. 모두 같은 그림이 나오면 승리!
+      </h3>
+    </header>
+
+    <!-- 이미지 동그랗게 -->
+    <section>
+      <img src="assets/spy1.jpg" width="250px" height="250px" />
+      <img src="assets/spy2.jpg" width="250px" height="250px" />
+      <img src="assets/spy3.jpg" width="250px" height="250px" />
+    </section>
+
+    <section id="button">
+      <button id="click">Click</button>
+      <button id="restart">Restart</button>
+    </section>
+
+    <!-- 게임 끝나면 뜨게하기 -->
+    <section id="cong">
+      <h3>축하합니다! 다시 시작하려면 재시작 버튼을 눌러주세요!</h3>
+    </section>
+  </body>
+</html>
