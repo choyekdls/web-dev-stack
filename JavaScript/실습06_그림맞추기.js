@@ -7,7 +7,7 @@ const countSpan = document.querySelector("#count");
 // 축하메세지 처음에는 화면에서 숨기기: 사진 일치 시 나오게 -> 조건문(if)
 cong.style.display = "none";
 
-// 클릭할 때마다 시도 횟수 카운트 됨됨
+// 클릭할 때마다 시도 횟수 카운트 됨
 let count = 0;
 click.addEventListener("click", () => {
   count++;
