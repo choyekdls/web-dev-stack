@@ -133,6 +133,7 @@ username.addEventListener("input", (i) => {
               emailExp.test(m.target.value) &&
               callExp.test(call.target.value)
             ) {
+              success.style.color = "green";
               s.disabled = false;
             }
             alert("회원가입 성공!");
