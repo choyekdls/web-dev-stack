@@ -1,0 +1,62 @@
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px;
+}
+form,
+#form {
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  padding: 10px;
+  width: 70%;
+  margin: auto;
+}
+
+form div,
+#form div {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  border: 1px solid lightgray;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid;
+  margin: 15px;
+}
+
+form span {
+  margin: 0px 5px 5px;
+}
+
+.button {
+  flex-direction: row;
+  justify-content: center;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  background: lightseagreen;
+  color: white;
+}
+
+#signup:disabled {
+  background: lightgray;
+}
+
+section {
+  display: flex;
+}
+
+#logout {
+  display: block;
+  margin: auto;
+}
