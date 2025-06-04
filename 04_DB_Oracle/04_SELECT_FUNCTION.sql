@@ -357,4 +357,47 @@ SELECT
 TO_NUMBER('100,000', '999,999') + TO_NUMBER('550,000', '999,999')
 FROM DUAL;
 
+/*
+  NULL 처리 함수
+  
+  NVL/COALESCE(값1, 값2)
+  - 값1이 NULL이 아니면 값1을 반환하고, 값1이 NULL이면 값2 반환
+*/
+-- USER_INFO에서 MBTI가 NULL인 경우 'MBTI 모름' 처리
+SELECT 
+NVL(MBTI, 'MBTI 모름')
+FROM USER_INFO;
 
+-- COALESCE(값1, 값2, ...)
+-- MBTI가 NULL이 아니면 MBTI, NULL이면 HOBBY, 이것 또한 NULL이면 '모름'
+SELECT NAME,
+COALESCE(MBTI, HOBBY, '모름')
+FROM USER_INFO;
+
+/*
+  NVL2(값1,값2, 값3)
+  - 값1이 NULL이 아니면 값2,NULL이면 값3
+*/
+-- EMPLOYEE에서 부서코드(DEPT_CODE)가 있으면 '부서있음', 없으면 '부서없음'
+SELECT EMP_NAME, DEPT_CODE,
+NVL2(DEPT_CODE, '부서있음', '부서없음')
+FROM EMPLOYEE;
+
+/*
+  NULLIF(값1, 값2)
+  - 두 개의 값이 동일하면 NULL, 동일하지 않으면 값1
+*/
+SELECT NULLIF('123', '123'), NULLIF('123', '456')
+FROM DUAL;
+
+/*
+  선택 함수 : 여러 가지 경우에 선택할 수 있는 기능을 제공
+  
+  DECODE(값, 조건값1, 결과값1, 조건값2, 결과값2, ...)
+  - 비교하고자 하는 값이 조건값과 일치하는 경우 그에 해당하는 결과값 반환
+*/
+-- EMPLOYEE에서 주민번호(EMP_NO)로 성별(남, 여) 조회
+SELECT
+SUBSTR(EMP_NO,8, 1),
+DECODE(SUBSTR(EMP_NO, 8, 1), 1, '남', 2, '여')
+FROM EMPLOYEE;
