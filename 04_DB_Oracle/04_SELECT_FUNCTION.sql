@@ -432,8 +432,9 @@ CASE WHEN JOB_CODE = 'J7' THEN SALARY*1.1
      WHEN JOB_CODE = 'J5' THEN SALARY*1.2
      ELSE SALARY*1.05
 END
-FROM EMPLOYEE;
--- ??????????????? 만약 정렬을 하고 싶다면?
+FROM EMPLOYEE
+ORDER BY JOB_CODE;
+-- 만약 정렬을 하고 싶다면? - ORDER BY 쓰면됨 이바보야...
 
 -- 급여가 500만원 초과일 경우 1등급
 -- 급여가 500만원 이하 350만원 초과일 경우 2등급
