@@ -201,6 +201,7 @@ WHERE EMAIL LIKE '___#_%' ESCAPE '#'; /*# 부분은 내가 원하는대로 변�
 
 -- 위 사원들 이외의 사원들 조회
 -- 부정연산자 : NOT
+-- NOT의 위치 설명 부분
 SELECT *
 FROM EMPLOYEE
 -- WHERE NOT EMAIL LIKE '___#_%' ESCAPE '#'; /*# 부분은 내가 원하는대로 변경가능 자르고 싶은 곳에 위치해주기*/
@@ -236,7 +237,7 @@ WHERE MBTI = 'INFP' OR MBTI = 'INTJ';
 
 SELECT *
 FROM USER_INFO
-WHERE MBTI IN ('INFP','INTJ');
+WHERE MBTI IN ('INFP','INTJ'); -- IN은 ()괄호와 함께
 
 -- EMPLOYEE 테이블에서 부서코드(DEPT_CODE)가 D5, D6, D8인 사원들 조회
 SELECT *
@@ -294,3 +295,79 @@ SELECT EMP_NAME, BONUS
 FROM EMPLOYEE
 -- ORDER BY BONUS NULLS FIRST; -- 오름차순인 경우는 NULL이 맨 뒤에
 ORDER BY BONUS DESC NULLS LAST; -- 내림차순인 경우는 NULL이 맨 앞에
+
+/*
+  GROUP BY
+  - 그룹 기준을 제시할 수 있는 구문
+  - 여러 개의 값들을 하나의 그룹으로 묶어서 처리할 목적으로 사용
+  - SELECT 에는 GROUP BY에 적혀있는 컬럼만 적을 수 있도록 제한이 됨
+*/
+
+-- MBTI별 평균 나이
+SELECT MBTI, AVG(AGE), SUM(AGE), COUNT(*)
+FROM USER_INFO
+GROUP BY MBTI;
+
+SELECT GENDER,
+COUNT(*)
+FROM USER_INFO
+GROUP BY GENDER
+-- EMPLOYEE :  성별 사원 수 조회
+
+SELECT *
+FROM EMPLOYEE;
+
+SELECT 
+DECODE(SUBSTR(EMP_NO, 8, 1),1,'남',2,'여'),
+COUNT(*)
+FROM EMPLOYEE
+GROUP BY SUBSTR(EMP_NO, 8, 1);
+
+/*
+  HAVING
+  - 그룹에 대한 조건을 제시할 떄 사용하는 구문
+
+  SELECT 실행 순서
+  
+  SELECT가 먼저 오는게 맞음
+  SELECT   * | 컬럼 | 함수
+  FROM     테이블명
+  WHERE    조건식
+  GROUP BY 그룹 기준에 해당하는 컬럼 | 함수
+  HAVING   조건식 (WHERE이랑 많이 헷갈려함. 그룹함수에 조건을 걸어야 한다~? 할때 사용)
+  ORDER BY 컬럼 | 별칭 | 컬럼순번(숫자)
+*/
+-- EMPLOYEE에서 부서별 평균 급여가 300만원 아성안 직원의 평균 급여를 조회(부서코드 - DETP CODE)
+-- DEPT_CODE가 NULL이 아닌 경우
+
+SELECT
+DEPT_CODE, TO_CHAR(FLOOR(AVG (NVL(SALARY, 0))), '9,999,999')
+FROM EMPLOYEE
+WHERE DEPT_CODE IS NOT NULL
+GROUP BY DEPT_CODE
+HAVING AVG (NVL(SALARY, 0)) >= 3000000; 
+
+-- 직급별(JOB_CODE) 총 급여의 합이 1000만원 이상인 직급만 조회
+
+SELECT 
+JOB_CODE, TO_CHAR(SUM(SALARY), '999,999,999')
+FROM EMPLOYEE
+GROUP BY JOB_CODE
+HAVING SUM(SALARY) >= 10000000;
+
+-- 부서별 보너스를 받는 사원이 없는 부서만 조회
+
+SELECT
+DEPT_CODE,
+COUNT(BONUS)
+FROM EMPLOYEE
+GROUP BY DEPT_CODE
+HAVING COUNT(BONUS) = 0;
+
+-- USER_INFO에서 MBTI별 평균 나이를 계산하는데, 평균 나이가 30이하인 MBTI만 조회
+
+SELECT
+MBTI, FLOOR(AVG(AGE))
+FROM USER_INFO
+GROUP BY MBTI
+HAVING FLOOR(AVG(AGE)) <= 30;
