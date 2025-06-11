@@ -1,0 +1,12 @@
+-- 공고번호, 이름, 나이, 
+CREATE TABLE LCKD_DOG (
+DOG_NO VARCHAR(50) PRIMARY KEY AUTO_INCREMENT,
+ENT_DATE DATE,
+DOG_NAME VARCHAR(50) UNIQUE NOT NULL,
+DOG_AGE INT NOT NULL,
+
+);
+
+-- 달력에 넣을 
+-- 임보, 임보자, 임보 기간, 인계자
+-- 입양, 입양일자, 인계자
