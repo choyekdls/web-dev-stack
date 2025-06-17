@@ -78,6 +78,8 @@ public class F_Triple {
 		
 		boolean result = 'A' <= num && num <= 'Z' || 'a' <= num && num <= 'z';
     	System.out.println(result ? "알파벳 " + (char)num + "입니다" : "알파벳이 아니네요..");
+    	
+    	// String으로도 만들어보기!
 	}
 }
 
