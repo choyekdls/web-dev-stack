@@ -26,11 +26,14 @@ public class VariablePractice {
 	 * */
 	public void method1() {
 
-		int a = 10000;
-		int s = 7000;
+		int adult = 10000;
+		int teen = 7000;
 		
-		System.out.println((a*2)+(s*3));
+		System.out.println((adult*2)+(teen*3));
+        System.out.println("지불할 금액은 총 " + ((adult*2)+(teen*3)) + "원 입니다.");
+        System.out.println("\n----------------------------------------------------------");
 	}
+	
 	
 	/*
 	 * x=5, y=7, z=9의 값을 직접 변경하지 않고 변수를 사용하여
@@ -48,13 +51,14 @@ public class VariablePractice {
 		
 		// 코드 적어주세요!
 		
-		final int rX = 7;
-		final int rY = 9;
-		final int rZ = 5;
+		final int newx = y;
+		final int newy = z;
+		final int newz = x;
 		
-		System.out.print("x= " + rX + "\ny= " + rY + "\nz= " + rZ);
-		
-		
+		System.out.println("x =" + newx);
+		System.out.println("y =" + newy);
+		System.out.println("z =" + newz);
+		System.out.println("\n----------------------------------------------------------");
  
 	}
 	
@@ -75,15 +79,27 @@ public class VariablePractice {
 		System.out.println();
 		
 		Scanner sc = new Scanner(System.in);
-				
-				System.out.print("첫 번째 정수 > ");
-				int num1 = Integer.parseInt(sc.nextLine());
-				
-				System.out.print("두 번째 정수 > ");
-				int num2 = Integer.parseInt(sc.nextLine());
-				
-				System.out.print("첫 번째 정수 : " + num1 + "\n두 번째 정수 : " + num2);
 		
+		System.out.print("\n첫 번째 정수 : ");
+		int num1 = Integer.parseInt(sc.nextLine());
+		
+		System.out.print("두 번째 정수 : ");
+		int num2 = Integer.parseInt(sc.nextLine());
+		
+		int add = num1 + num2;
+		
+		int sub = num1 - num2;
+		
+		int multi = num1 * num2;
+		
+		int division = num1 / num2;
+		
+		int remain = num1 % num2;
+		
+		System.out.print("\n더하기 :" + add + "\n빼기 : " + sub + "\n곱하기 : " + multi + "\n나누기 : " + division + "\n나머지 : " + remain);
+		System.out.println("\n---ptintf식으로 작성해보기---");
+		System.out.printf("\n첫 번째 정수 : %d \n두 번째 정수 :  %d \n더하기 : %d \n빼기 : %d \n곱하기 : %d \n나누기 : %d \n나머지 : %d", num1, num2, add, sub, multi, division, remain);
+		System.out.println("\n----------------------------------------------------------");
 	}
 
 	/*
@@ -97,6 +113,21 @@ public class VariablePractice {
 	 * 둘레 : 110.4
 	 * */
 	public void method4() {
+Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n가로 : ");
+		double width = Double.parseDouble(sc.nextLine());
+		
+		System.out.print("세로 : ");
+		double height = Double.parseDouble(sc.nextLine());
+		
+		double area = width * height;
+		double perimeter = (width + height)*2;
+		
+		System.out.print("\n면적 : " + area + "\n둘레 : " + perimeter );
+		System.out.println("\n---ptintf식으로 작성해보기---");
+		System.out.printf("\n가로 : %.2f \n세로 : %.2f \n면적 : %.2f \n둘레 : %.2f", width, height, area, perimeter);
+		System.out.println("\n----------------------------------------------------------");
 
 	}
 
@@ -109,6 +140,21 @@ public class VariablePractice {
 	 * 마지막 문자 : e
 	 * */
 	public void method5() {
+Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n문자열을 입력하세요 : ");
+		String input = sc.nextLine();
+		
+		int length = input.length();
+		char firstChar = input.charAt(0);
+		char secondChar = input.charAt(1);
+		char lastChar = input.charAt(length-1);
+		 
+		System.out.print("\n첫 번째 문자 : " + firstChar + "\n두 번째 문자 : " + secondChar + "\n마지막 문자: " + lastChar);
+		System.out.println("\n---ptintf식으로 작성해보기---");
+		System.out.printf("\n첫 번째 문자 : %c \n두 번째 문자 : %c \n마지막 문자 : %c", firstChar, secondChar, lastChar);
+		System.out.println("\n----------------------------------------------------------");
+
 
 	}
 
@@ -120,7 +166,18 @@ public class VariablePractice {
 	 * B unicode : 66
 	 * */
 	public void method6() {
-
+		 Scanner sc = new Scanner(System.in);
+			
+			System.out.print("\n문자 하나를 입력하세요 : ");
+			String input = sc.nextLine();
+			
+			int ch = input.charAt(0);
+			int nextch = ch+1;
+			System.out.println(input + "unicode : " + ch);
+			System.out.println(nextch);
+			// 다음 문자의 유니코드..출력 방법,,,..HOW..?
+			System.out.println("\n----------------------------------------------------------");
+			
 	}
 	
 	/*
@@ -133,7 +190,23 @@ public class VariablePractice {
 	 * 평균 : 72.67
 	 * */
 	public void method7() {
-
+		 Scanner sc = new Scanner(System.in);
+			
+			System.out.print("\n국어 : ");
+			double lang = Double.parseDouble(sc.nextLine());
+			
+			System.out.print("영어 : ");
+			double eng = Double.parseDouble(sc.nextLine());
+			
+			System.out.print("수학 : ");
+			double math = Double.parseDouble(sc.nextLine());
+			
+			double sum = (lang + eng + math);
+			double avg = sum / 3;
+			
+			System.out.print("\n총점 : " + sum + "\n평균 : " + avg);
+			System.out.println("\n---ptintf식으로 작성해보기---");
+			System.out.printf("\n국어 : %.2f \n영어 : %.2f \n수학 : %.2f \n총점 : %.2f \n평균 : %.2f", lang, eng, math, sum, avg);
 	}
 
 }
