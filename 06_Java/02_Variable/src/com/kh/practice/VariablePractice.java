@@ -8,10 +8,10 @@ public class VariablePractice {
 	
 	public static void main(String[] args) {
 		VariablePractice v = new VariablePractice();
-		v.method1();
-		v.method2();
-		v.method3();
-		v.method4();
+//		v.method1();
+//		v.method2();
+//		v.method3();
+//		v.method4();
 		v.method5();
 		v.method6();
 		v.method7();
@@ -55,6 +55,13 @@ public class VariablePractice {
 		final int newy = z;
 		final int newz = x;
 		
+		/*
+		 * int temp = x;
+		 * x = y;
+		 * y = z
+		 * z = temp;
+		 * */
+		
 		System.out.println("x =" + newx);
 		System.out.println("y =" + newy);
 		System.out.println("z =" + newz);
@@ -75,6 +82,8 @@ public class VariablePractice {
 	 * 나누기 몫 : 3
 	 * */
 	public void method3() {
+		
+		//정렬 :  내가 정렬하고자 하는 부분 선택하고 Ctrl + Shift + F
 		
 		System.out.println();
 		
@@ -125,8 +134,9 @@ Scanner sc = new Scanner(System.in);
 		double perimeter = (width + height)*2;
 		
 		System.out.print("\n면적 : " + area + "\n둘레 : " + perimeter );
+		//System.out.println("둘레 : " + String.format("%.1f", perimeter))
 		System.out.println("\n---ptintf식으로 작성해보기---");
-		System.out.printf("\n가로 : %.2f \n세로 : %.2f \n면적 : %.2f \n둘레 : %.2f", width, height, area, perimeter);
+		System.out.printf("\n가로 : %.2f \n세로 : %.2f \n면적 : %.2f \n둘레 : %.1f", width, height, area, perimeter);
 		System.out.println("\n----------------------------------------------------------");
 
 	}
@@ -166,21 +176,25 @@ Scanner sc = new Scanner(System.in);
 	 * B unicode : 66
 	 * */
 	public void method6() {
+		
+		/*
+		 * int num = 'A'
+		 * 
+		 * */
 		 Scanner sc = new Scanner(System.in);
 			
 			System.out.print("\n문자 하나를 입력하세요 : ");
-			String input = sc.nextLine();
+			char num = sc.nextLine().charAt(0);
 			
-			int ch = input.charAt(0);
-			int nextch = ch+1;
-			System.out.println(input + "unicode : " + ch);
-			System.out.println(nextch);
-			// 다음 문자의 유니코드..출력 방법,,,..HOW..?
+			int nextch = num;
+			System.out.println(num + " unicode : " + nextch);
+			System.out.println((char)(nextch+1) + " unicode : " + (nextch+1) );
 			System.out.println("\n----------------------------------------------------------");
 			
 	}
 	
 	/*
+	 *
 	 * 국어, 영어, 수학 세 과목의 점수를 입력 받아 총점과 평균을 출력하세요.
 	 * 
 	 * 국어 : 75
@@ -207,6 +221,7 @@ Scanner sc = new Scanner(System.in);
 			System.out.print("\n총점 : " + sum + "\n평균 : " + avg);
 			System.out.println("\n---ptintf식으로 작성해보기---");
 			System.out.printf("\n국어 : %.2f \n영어 : %.2f \n수학 : %.2f \n총점 : %.2f \n평균 : %.2f", lang, eng, math, sum, avg);
+			// 조금만 손 대보자.......
 	}
 
 }
