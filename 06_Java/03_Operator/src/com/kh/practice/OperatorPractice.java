@@ -9,12 +9,12 @@ public class OperatorPractice {
 	public static void main(String[] args) {
 
 		OperatorPractice o = new OperatorPractice();
-		o.method1();
-		o.method2(); 
-		o.method3();
-		o.method4();
-		o.method5();
-		o.method6();
+//		o.method1();
+//		o.method2(); 
+//		o.method3();
+//		o.method4();
+//		o.method5();
+//		o.method6();
 		o.method7();
 		o.method8();
 		
@@ -40,7 +40,8 @@ public class OperatorPractice {
 		System.out.print("숫자를 입력해주세요 > ");
 		int num = Integer.parseInt(sc.nextLine());
 		 
-		System.out.println((num / 100) * 100);// 다시 생각해보기
+		System.out.println((num / 100) * 100);
+		// System.out.println (num - (num % 100)); 
 		System.out.println("-------------------------------------\n");
 		
 	}
@@ -74,9 +75,9 @@ public class OperatorPractice {
 	//주민번호(-포함)를 입력받아 남자인지 여자인지 구분하여 출력하세요
 	public void method5() {
 		System.out.print("주민번호를 입력해주세요 > ");
-		String no = sc.nextLine();
-		char noChar = no.charAt(7);
-	    String result = (noChar == '1') ? "남자" : (noChar == '2') ? "여자" : "사람이 아닙니다";
+		char no = sc.nextLine().charAt(7); //이런 이지한 방법이..!
+	
+	    String result = (no == '1' || no == '3') ? "남자" : (no == '2' || no == '4') ? "여자" : "사람이 아닙니다";
 	    System.out.println(result);
 	    System.out.println("-------------------------------------\n");
 	}
@@ -100,7 +101,8 @@ public class OperatorPractice {
 		
 		System.out.print("바구니 크기> ");
 		int basket = Integer.parseInt(sc.nextLine());
-		System.out.println("필요한 바구니 수 : " + (apple / basket));
+
+        System.out.println(apple % basket == 0 ? (apple / basket) : ((apple / basket) + 1));
 		System.out.println("-------------------------------------\n");
 	}
 	
