@@ -9,11 +9,11 @@ public class OperatorPractice {
 	public static void main(String[] args) {
 
 		OperatorPractice o = new OperatorPractice();
-//		o.method1();
-//		o.method2(); // 다시 풀어봐야함 -.-
-//		o.method3();
-//		o.method4();
-//		o.method5();
+		o.method1();
+		o.method2(); 
+		o.method3();
+		o.method4();
+		o.method5();
 		o.method6();
 		o.method7();
 		o.method8();
@@ -40,9 +40,8 @@ public class OperatorPractice {
 		System.out.print("숫자를 입력해주세요 > ");
 		int num = Integer.parseInt(sc.nextLine());
 		 
-		System.out.println(num);// 다시 생각해보기
+		System.out.println((num / 100) * 100);// 다시 생각해보기
 		System.out.println("-------------------------------------\n");
-		//String noStr = no.substring(7, 8) 참고해서 사용해보기
 		
 	}
 
@@ -90,17 +89,30 @@ public class OperatorPractice {
 		
 		String result = age > 19 ? "성인" : age < 13 ? "어린이" : "청소년";
 		System.out.println(result);
+		System.out.println("-------------------------------------\n");
 	}
 
 	//사과의 개수와 바구니의 크기(바구니 1개의 들어가는 사과의 개수)를 입력받아
 	//필요한 바구니의 수를 출력하세요
 	public void method7() {
+		System.out.print("사과 수> ");
+		int apple = Integer.parseInt(sc.nextLine());
 		
+		System.out.print("바구니 크기> ");
+		int basket = Integer.parseInt(sc.nextLine());
+		System.out.println("필요한 바구니 수 : " + (apple / basket));
+		System.out.println("-------------------------------------\n");
 	}
 	
 	//초 단위 시간을 입력받아 1시간 1분 1초 형식으로 출력
 	public void method8() {
+		System.out.print("초 > ");
+		int seconds = Integer.parseInt(sc.nextLine());
+		int hours = seconds / 3600;
+		int mins = (seconds % 3600) / 60;
+		int second = seconds % 60;
 		
+		System.out.println(hours + "시간 " + mins + "분 " + second + "초");
 	}
 	
 }
