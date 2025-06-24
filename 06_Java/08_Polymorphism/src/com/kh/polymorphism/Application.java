@@ -1,5 +1,7 @@
 package com.kh.polymorphism;
 
+import java.util.Scanner;
+
 import com.kh.polymorphism.controller.EmployeeController;
 // FQCN(Full Qualified Class Name)
 import com.kh.polymorphism.model.*;
@@ -34,15 +36,21 @@ public class Application {
 		for (Employee employee : emp) {
 			System.out.println(employee);
 		}
-		
+
 		EmployeeController ec = new EmployeeController();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("이름을 입력해주세요 > ");
+		String name = sc.nextLine();
 
 		// 이름으로 사람(Employee) 찾기 -> 이름은 문자열, getName
-		Employee findEmployee = ec.findEmployee(emp);
-		
+		Employee findEmployee = ec.findEmployee(emp, name);
+
 		// 찾은 사람의 연봉(getSalary * 12)은?
 		// 특정 자식 객체 찾는 방법!
-		System.out.println(ec.getAnnualSalary(findEmployee));
+		int annual = ec.getAnnualSalary(findEmployee);
+		if (annual != -1) {
+			System.out.println(annual);
+		} 
 
 		// 전체 총 월급
 		// 어려워..................................ㅠ.ㅠ.............!!!!!!!!!!!!!!!!!!!!!!!!
