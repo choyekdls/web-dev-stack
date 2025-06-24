@@ -5,18 +5,20 @@ import com.kh.polymorphism.model.Engineer;
 
 public class EmployeeController {
 
-	public Employee findEmployee(Employee[] emp) {
+	public Employee findEmployee(Employee[] emp, String name) {
 		Employee findEmployee = null;
 		for (Employee employee : emp) {
-			if (employee.getName().equals("최다인")) {
-				findEmployee = employee;
+			if (employee.getName().equals(name)) {
+				return employee;
 				
 			}
 		}
-		return findEmployee;
+		return null;
 	}
 	
 	public int getAnnualSalary(Employee findEmployee) {
+		if(findEmployee == null) return -1;
+		
 		if (findEmployee instanceof Engineer) {
 			Engineer engineer = (Engineer) findEmployee;
 			return engineer.getSalary() * 12 + engineer.getBonus();
