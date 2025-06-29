@@ -9,11 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class Member {
 	private String name;
 	private int age;
 	private int coupon;
 	private ArrayList<Book> bookList = new ArrayList<>();
+	
+	// 모델에 값을 담아야 하는데, 가장 쉬운 방법은 생성자로!
+//	public Member(String name, int age) {
+//		this.name = name;
+//		this.age = age;
+//	}
 
 }
