@@ -10,16 +10,15 @@ public class MusicController {
 	Music m;
 	
 	//1. 특정 곡 추가
-	public void addList() {
+	public String addList() {
 		for (Music music : list) {
 			if (m.getSong().contains(music.getSong())) {
 				this.m = new Music();
-				System.out.println("플레이리스트에 이미 존재하는 곡입니다.");
-				return;
+				return "플레이리스트에 이미 존재하는 곡입니다.";
 				} 
 		}
 		list.add(m);
-		System.out.println("플레이리스트에 추가하였습니다.");	
+		return "플레이리스트에 추가하였습니다.";	
 	}
 	
 	//2. 전체 곡 목록 출력
