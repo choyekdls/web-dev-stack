@@ -1,6 +1,7 @@
 package com.kh.practice3;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 import com.kh.practice3.controller.MusicController_T;
@@ -33,6 +34,8 @@ public class Application_T {
 				System.out.println("4. 특정 곡 수정");
 				System.out.println("5. 특정 곡 삭제");
 				System.out.println("6. 종료");
+				System.out.println("7. 가수명 내림차순");
+				System.out.println("8. 곡명 오름차순");
 				System.out.print("메뉴 번호 입력 : ");
 				switch (Integer.parseInt(sc.nextLine())) {
 				case 1:
@@ -53,6 +56,12 @@ public class Application_T {
 				case 6:
 					System.out.println("종료");
 					check = false;
+					break;
+				case 7:
+					descArtist();
+					break;
+				case 8:
+					ascSong();
 					break;
 				default:
 					System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
@@ -76,7 +85,11 @@ public class Application_T {
 		String song = sc.nextLine();
 		System.out.println("가수명 : ");
 		String artist = sc.nextLine();
-		mct.addList(song, artist);
+		if (mct.addList(song, artist)) {
+			System.out.println("추가 성공");
+		} else {
+			System.out.println("추가 실패");
+		}
 	}
 
 	// 2. 전체 곡 목록 출력
@@ -85,8 +98,14 @@ public class Application_T {
 		 * ****** 전체 곡 목록 출력 ******
 		 */
 		System.out.println("****** 전체 곡 목록 출력 ******");
-		System.out.println(mct.printAll());
-
+		ArrayList<Music> result = mct.printAll();
+		if (result.isEmpty()) {
+			System.out.println("곡이 하나도 없습니다.");
+		} else {
+			for (Music music : result) {
+				System.out.println(music);
+			}
+		}
 	}
 
 	// 3. 특정 곡 검색
@@ -99,9 +118,10 @@ public class Application_T {
 		System.out.println(" ****** 특정 곡 검색(가수/곡) ****** ");
 		System.out.println("키워드 검색 : ");
 		String keyword = sc.nextLine();
-		Music result = mct.searchMusic(keyword);
-		if (result != null) {
-			System.out.println("(" + result.getArtist() + " - " + result.getSong() + "을 검색했습니다.)");
+		ArrayList<Music> result = mct.searchMusic(keyword);
+		if (!result.isEmpty()) {
+			for (Music music : result)
+				System.out.println("(" + music.getArtist() + " - " + music.getSong() + "을 검색했습니다.)");
 		} else {
 			System.out.println("검색할 곡을 찾지 못했습니다.");
 		}
@@ -121,12 +141,20 @@ public class Application_T {
 		System.out.println(" ****** 특정 곡 수정 ****** ");
 		System.out.println("검색할 곡명 : ");
 		String searchSong = sc.nextLine();
+
+		String searchArtist = checkMusic(searchSong);
+
 		System.out.println("수정할 곡명 : ");
 		String updateSong = sc.nextLine();
 		System.out.println("수정할 가수명 : ");
 		String updateArtist = sc.nextLine();
-		mct.updateMusic(searchSong, new Music(updateSong, updateArtist));
+		Music update = mct.updateMusic(searchSong, searchArtist, new Music(updateSong, updateArtist));
 
+		if (update != null) {
+			System.out.println(update.getArtist() + " - " + update.getSong() + "을 수정했습니다.");
+		} else {
+			System.out.println("기존에 이미 있는 곡입니다.");
+		}
 	}
 
 	// 5. 특정 곡 삭제
@@ -139,9 +167,12 @@ public class Application_T {
 		System.out.println(" ****** 특정 곡 삭제 ****** ");
 		System.out.println("삭제할 곡명 : ");
 		String song = sc.nextLine();
-	    Music result = mct.removeMusic(song);
-		
-		if(result != null) {
+
+		String artist = checkMusic(song);
+
+		Music result = mct.removeMusic(song, artist);
+
+		if (result != null) {
 			System.out.println("(" + result.getArtist() + " - " + result.getSong() + "을 삭제했습니다.)");
 		} else {
 			System.out.println("삭제할 곡이 없습니다.");
@@ -149,4 +180,36 @@ public class Application_T {
 
 	}
 
+	// 여러 결과 리스트 확인
+	public String checkMusic(String song) {
+		ArrayList<Music> result = mct.checkMusic(song);
+		String searchArtist = null;
+		if (result.size() > 1) {
+			for (Music music : result) {
+				System.out.println(music);
+			}
+			System.out.println("가수명 입력 : ");
+			searchArtist = sc.nextLine();
+		}
+		return searchArtist;
+	}
+
+	// 가수명 내림차순 정렬
+	public void descArtist() {
+		System.out.println("****** 가수명 내림차순 정렬 ******");
+		ArrayList<Music> list = mct.descArtist();
+		for (Music music : list) {
+			System.out.println(music);
+		}
+
+		System.out.println();
+	}
+
+	public void ascSong() {
+		System.out.println("****** 곡명 오름차순 정렬 ******");
+		ArrayList<Music> list = mct.ascSong();
+		for (Music music : list) {
+			System.out.println(music);
+		}
+	}
 }
