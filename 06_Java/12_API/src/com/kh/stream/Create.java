@@ -1,6 +1,7 @@
 package com.kh.stream;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -48,6 +49,10 @@ public class Create {
 		String[] names = {"오재덕" , "이승민", "이환희", "박기민", "조규상", "이상엽", "성예찬"};
 		
 	    Stream<String> stream = Arrays.stream(names);
+	    stream.forEach(name -> System.out.println(name)); // 한 번 쓰면 끝입니다...
+	    
+	    List<String> nameList = Arrays.asList(names);
+	    stream = nameList.stream();
 	    stream.forEach(name -> System.out.println(name));
 	    
 	}
