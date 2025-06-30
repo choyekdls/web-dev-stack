@@ -49,9 +49,6 @@ public class A_Match {
 				.anyMatch(student -> student.getGender().equals("남자") && ((student.getMath() + student.getEng()) / 2) >= 90);
 		System.out.println("남학생들 중에 평균이 90점 이상인 학생이 한명이라도 존재하는가? " + result1);
 		
-		
-		
-
 	}
 
 	public static void main(String[] args) {
