@@ -8,13 +8,11 @@ import controller.PersonController;
 public class PersonView {
 
 	Scanner sc = new Scanner(System.in);
+	PersonController pc = new PersonController();
 
-	public static void main(String[] args) throws SQLException {
 		// 테스트 용도!
 		
-		PersonController pc = new PersonController();
-
-	public void mainMenu() {
+	public void mainMenu() throws SQLException {
 		boolean check = true;
 		while (check) {
 			System.out.println("1. 신규 사용자 등록");
@@ -27,21 +25,26 @@ public class PersonView {
 
 			switch (num) {
 			case 1:
-				addPerson();
+				pc.addPerson();
 				break;
 			case 2:
+				pc.searchAllPerson();
 				break;
 			case 3:
+				pc.searchPerson();
 				break;
 			case 4:
+				pc.updatePerson();
 				break;
 			case 5:
+				pc.removePerson();
 				break;
 			default:
 				System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
 			}
-
-		}
+}
+		
 	}
+	
 
 }
