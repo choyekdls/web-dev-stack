@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import config.ServerInfo;
 
@@ -13,6 +14,7 @@ public class PersonController {
 	// 리턴 타입이나 파라미터 자유롭게 변경 가능!
 	// 메서드 추가 가능!
 
+	Scanner sc = new Scanner(System.in);
 	Connection connect;
 	PreparedStatement ps;
 	ResultSet rs;
@@ -25,6 +27,7 @@ public class PersonController {
 			e.printStackTrace();
 		}
 	}
+	
 
 	// 고정적으로 반복 -- 디비 연결
 	// 2. 디비 연결
