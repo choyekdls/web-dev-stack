@@ -48,12 +48,15 @@ public class PersonController {
 	
 	// ------------------------------ 변동적인 반복 : DAO(Database Access Object)
 
+	// 1. 신규 사용자 등록
 	// person 테이블에 데이터 추가 - INSERT
 	public void addPerson() throws SQLException {
 
 		Connection connect = getConnect();
 
 		// 3. PreparedStatement 객체 생성 - 쿼리
+		
+		System.out.println("이름 > ");
 		String query1 = "INSERT INTO person(name, age, addr)VALUES(?, ?, ?)";
 		PreparedStatement ps1 = connect.prepareStatement(query1);
 
@@ -78,6 +81,7 @@ public class PersonController {
 
 	}
 
+	// 2. 전체 사용자 조회
 	// person 테이블에 있는 데이터 전체 보여주기 - SELECT
 	public void searchAllPerson() throws SQLException {
 		Connection connect = getConnect();
@@ -97,6 +101,7 @@ public class PersonController {
 		close(rs, ps, connect);
 	}
 
+	// 3. 사용자 검색 및 조회
 	// person 테이블에서 데이터 한개만 가져오기 - SELECT -> id로!
 	public void searchPerson() throws SQLException {
 		Connection connect = getConnect();
@@ -117,6 +122,7 @@ public class PersonController {
 		close(rs, ps, connect);
 	}
 
+	// 4. 사용자 정보 수정
 	// person 테이블에 데이터 수정 - UPDATE
 	public void updatePerson() throws SQLException {
 		Connection connect = getConnect();
@@ -133,6 +139,7 @@ public class PersonController {
 
 	}
 
+	// 5. 사용자 정보 삭제
 	// person 테이블에 데이터 삭제 - DELETE
 	public void removePerson() throws SQLException {
 		Connection connect = getConnect();
