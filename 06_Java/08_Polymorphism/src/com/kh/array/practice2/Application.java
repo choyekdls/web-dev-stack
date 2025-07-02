@@ -78,6 +78,7 @@ public class Application {
 			System.out.println("프로그램을 종료합니다.");
 			break;
 		}
+	}
 		
 		/*
 		 * 회원 수가 3명이 최대 등록 가능
@@ -114,7 +115,7 @@ public class Application {
 		 * */
 				
 	}
-}
+
 
 
 
