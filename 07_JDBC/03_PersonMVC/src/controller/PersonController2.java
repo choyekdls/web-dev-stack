@@ -5,8 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import config.ServerInfo;
+import vo.Person;
 
 public class PersonController2 {
 
@@ -31,67 +34,90 @@ public class PersonController2 {
 	public Connection getConnect() throws SQLException {
 		return connect = DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASSWORD);
 	}
-	
+
 	// 오버로딩
 	public void close(PreparedStatement ps, Connection connect) throws SQLException {
 		ps.close();
 		connect.close();
 	}
-	
+
 	public void close(ResultSet rs, PreparedStatement ps, Connection connect) throws SQLException {
 		rs.close();
 		close(ps, connect);
 	}
-	
+
 	// ------------------------------ 변동적인 반복 : DAO(Database Access Object)
 
-	// person 테이블에 데이터 추가 - INSERT
-	public void addPerson() throws SQLException {
-
+	// 이름, 나이, 주소가 모드 다 같은 경우 "이미 정보가 있습니다." -> 가입 X
+	public boolean checkName(String name, int age, String addr) throws SQLException {
 		Connection connect = getConnect();
 
-		// 3. PreparedStatement 객체 생성 - 쿼리
-		String query1 = "INSERT INTO person(name, age, addr)VALUES(?, ?, ?)";
-		PreparedStatement ps1 = connect.prepareStatement(query1);
+		String query = "SELECT * FROM person WHERE name = ? AND age = ? AND  addr = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
 
-		ps1.setString(1, "최다인");
-		ps1.setInt(2, 29);
-		ps1.setString(3, "경기도 오산시");
+		ps.setString(1, name);
+		ps.setInt(2, age);
+		ps.setString(3, addr);
 
-		// 4. 쿼리 실행
-		ps1.executeUpdate();
+		ResultSet rs = ps.executeQuery();
 
-		String query2 = "INSERT INTO person(name, age, addr)VALUES(?, ?, ?)";
-		PreparedStatement ps2 = connect.prepareStatement(query2);
+		// rs.next() - 존재하면 true, 존재하지 않으면 false
+		return rs.next();
 
-		ps2.setString(1, "최혜정");
-		ps2.setInt(2, 31);
-		ps2.setString(3, "경기도 안산시");
+	}
 
-		ps2.executeUpdate();
-		
-		// 5. 자원 반납
-		close(ps, connect);
+	// person 테이블에 데이터 추가 - INSERT
+	public String addPerson(String name, int age, String addr) {
+
+		try {
+
+			// 이름, 나이, 주소가 모드 다 같은 경우 "이미 정보가 있습니다." -> 가입 X
+			boolean check = checkName(name, age, addr);
+			if (check) {
+				return "이미 정보가 있습니다.";
+			}
+
+			Connection connect = getConnect();
+
+			// 3. PreparedStatement 객체 생성 - 쿼리
+			String query = "INSERT INTO person(name, age, addr)VALUES(?, ?, ?)";
+			PreparedStatement ps = connect.prepareStatement(query);
+
+			ps.setString(1, name);
+			ps.setInt(2, age);
+			ps.setString(3, addr);
+
+			// 4. 쿼리 실행
+			int result = ps.executeUpdate();
+
+			// 5. 자원 반납
+			close(ps, connect);
+
+			return name + "님, 회원가입 완료";
+
+		} catch (SQLException e) {
+			return "회원가입 실패";
+		}
 
 	}
 
 	// person 테이블에 있는 데이터 전체 보여주기 - SELECT
-	public void searchAllPerson() throws SQLException {
+	public List<Person> searchAllPerson() throws SQLException {
 		Connection connect = getConnect();
 
 		String query = "SELECT * FROM person";
 		ps = connect.prepareStatement(query);
 
 		rs = ps.executeQuery();
+		List<Person> list = new ArrayList<>();
 
 		while (rs.next()) {
 
-			String name = rs.getString("name");
-			int age = rs.getInt("age");
-			String addr = rs.getString("addr");
-			System.out.println(name + " / " + age + " / " + addr);
+			Person person = new Person(rs.getInt("id"), rs.getString("name"), rs.getInt("age"), rs.getString("addr"));
+			list.add(person);
 		}
 		close(rs, ps, connect);
+		return list;
 	}
 
 	// person 테이블에서 데이터 한개만 가져오기 - SELECT -> id로!
@@ -125,7 +151,7 @@ public class PersonController2 {
 		ps.setString(2, "최혜정");
 
 		System.out.println(ps.executeUpdate() + "정보 수정 완료!");
-		
+
 		close(ps, connect);
 
 	}
@@ -142,7 +168,7 @@ public class PersonController2 {
 		ps.setInt(1, num);
 
 		System.out.println(ps.executeUpdate() + "데이터 삭제되었습니다.");
-		
+
 		close(ps, connect);
 
 	}
