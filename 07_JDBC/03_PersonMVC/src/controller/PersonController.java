@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
-
 import config.ServerInfo;
 
 public class PersonController {
@@ -14,7 +12,6 @@ public class PersonController {
 	// 리턴 타입이나 파라미터 자유롭게 변경 가능!
 	// 메서드 추가 가능!
 
-	Scanner sc = new Scanner(System.in);
 	Connection connect;
 	PreparedStatement ps;
 	ResultSet rs;
@@ -50,13 +47,12 @@ public class PersonController {
 
 	// 1. 신규 사용자 등록
 	// person 테이블에 데이터 추가 - INSERT
-	public void addPerson() throws SQLException {
+	public void addPerson(String name, int age, String addr) throws SQLException {
 
 		Connection connect = getConnect();
 
 		// 3. PreparedStatement 객체 생성 - 쿼리
 		
-		System.out.println("이름 > ");
 		String query1 = "INSERT INTO person(name, age, addr)VALUES(?, ?, ?)";
 		PreparedStatement ps1 = connect.prepareStatement(query1);
 
