@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-
 import config.ServerInfo;
 import vo.Book;
 
@@ -33,7 +31,7 @@ private static BookDAO instance = new BookDAO();
 	}
 	
 	// 1. 전체 책 조회
-	public List<Book> printBookAll() throws SQLException {
+	public ArrayList<Book> printBookAll() throws SQLException {
 		
 		Connection connect = connect();
 		
@@ -41,7 +39,7 @@ private static BookDAO instance = new BookDAO();
 		PreparedStatement ps = connect.prepareStatement(query);
 		
 		ResultSet rs = ps.executeQuery();
-		List<Book> list = new ArrayList<>();
+		ArrayList<Book> list = new ArrayList<>();
 		
 		while (rs.next()) {
 			Book book = new Book(rs.getInt("book_no"), rs.getString("title"), rs.getString("author"), rs.getInt("access_age"));
@@ -52,13 +50,53 @@ private static BookDAO instance = new BookDAO();
 		return list;
 	}
 	
+	// 책 등록 중복 방지
+	public boolean checkBook(String title, String author, int accessAge) throws SQLException {
+		Connection connect = connect();
+		
+		String query = "SELECT * FROM book WHERE title = ? AND author = ? AND access_age = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		
+		ps.setString(1, title);
+		ps.setString(2, author);
+		ps.setInt(3, accessAge);
+		
+		ResultSet rs = ps.executeQuery();
+		return rs.next();
+	}
+	
+	
 	// 2. 책 등록
-	public void registerBook(String title, String author, int accessAge) {
+	public String registerBook(String title, String author, int accessAge) throws SQLException {
+		
+		Connection connect = connect();
+		
+		String query = "INSERT INTO book(title, author, access_age) VALUES (?, ?, ?)";
+		PreparedStatement ps = connect.prepareStatement(query);
+		
+		ps.setString(1, title);
+		ps.setString(1, author);
+		ps.setInt(1, accessAge);
+		
+		int result = ps.executeUpdate();
+		
+		return "책 등록이 완료되었습니다.";
 		
 	}
 
 	// 3. 책 삭제
-	public void sellBook(int bookNo) {
+	public boolean sellBook(int bookNo) throws SQLException {
+		
+		Connection connect = connect();
+		
+		String query = "DELETE FROM book WHERE book_no = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		
+		ps.setInt(1, bookNo);
+		
+		ps.executeUpdate();
+		
+		return true;
 		
 	}
 }
