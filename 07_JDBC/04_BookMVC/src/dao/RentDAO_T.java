@@ -63,13 +63,29 @@ public class RentDAO_T {
 			rent.setId(rs.getString("id"));
 			rent.setBookNo(rs.getInt("book_no"));
 			rent.setRentDate(rs.getDate("rent_date").toLocalDate());
-			rent.setBook(new Book_T());
+			rent.setBook(new Book_T(rs.getInt("book_no"), rs.getString("title"),rs.getString("author"), rs.getInt("access_age")));
 			
 			list.add(rent);
 		}
 		return list;
 	}
 
+	// 책 제목으로 rent_no값 조회
+		public int selectRent(String title, String id) throws SQLException {
+			Connection connect = connect();
+			
+			String query = "SELECT rent_no FROM rent JOIN book USING(book_no) WHERE title = ? AND id = ?";
+			PreparedStatement ps = connect.prepareStatement(query);
+			ps.setString(1, title);
+			ps.setString(2, id);
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("rent_no");
+			}
+			return -1;
+		}
+	
 	// 9. 대여 취소
 	public void deleteRent(int rentNo) throws SQLException {
 		Connection connect = connect();
