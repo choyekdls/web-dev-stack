@@ -15,8 +15,8 @@ public class Rent_T { // -> rent
 	private LocalDate rentDate; // --> rent_date
 	
 	// ---------------------------
-	private Member member;
-	private Book book;
+	private Member_T member;
+	private Book_T book;
 }
 
 
