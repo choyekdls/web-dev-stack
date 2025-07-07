@@ -42,9 +42,9 @@ public class RentController_T {
 	}
 	
 	// 9. 대여 취소
-	public boolean deleteRent(int rentNo) {
+	public boolean deleteRent(String title, String id) {
 		try {
-			dao.deleteRent(rentNo);
+			dao.deleteRent(dao.selectRent(title, id));
 			return true;
 		} catch (SQLException e) {
 			return false;
