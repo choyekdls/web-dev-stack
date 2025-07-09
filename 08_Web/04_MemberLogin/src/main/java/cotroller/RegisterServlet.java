@@ -21,8 +21,8 @@ public class RegisterServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		String name = request.getParameter("name");
 		String id = request.getParameter("id");
+		String name = request.getParameter("name");
 		String pwd = request.getParameter("pwd");
 		int age = Integer.parseInt(request.getParameter("age"));
 		
@@ -30,11 +30,13 @@ public class RegisterServlet extends HttpServlet {
 		
 		try {
 			dao.register(new Member(id, name, pwd, age));
+	
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+	
+		response.sendRedirect("/");
 	}
 
 	
