@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 
 public class Member {
 
-	private String name;
 	private String id;
+	private String name;
 	private String pwd;
 	private int age;
-	
+
 }
