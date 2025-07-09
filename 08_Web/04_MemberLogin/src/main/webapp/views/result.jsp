@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%Member member = (Member)request.getAttribute("member");
+<% Member member = (Member)request.getAttribute("member");
 String id = request.getParameter("id");%>
 <% if(member != null) { %>
 <h1>회원정보</h1>
-<table>
+<table border ="1">
 <tr>
 <th>이름</th>
 <th>아이디</th>
@@ -29,6 +29,7 @@ String id = request.getParameter("id");%>
 <%} else { %>
 <h2>아이디가 <%=id %>인 회원 정보가 없습니다:(</h2>
 <%} %>
-
+<a href="/views/search.jsp">다른 회원 검색하기</a><br>
+<a href="/">메인 페이지로 이동</a>
 </body>
 </html>
