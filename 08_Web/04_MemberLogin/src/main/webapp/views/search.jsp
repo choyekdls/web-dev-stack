@@ -8,9 +8,9 @@
 </head>
 <body>
 <h1>회원 검색</h1>
-<form action="search" method="get">
+<form action="/search" method="get">
 <label>검색할 아이디 : <input type="text" name="id" /></label>
-<input type="submit" value="조회">
+<input type="submit" value="검색">
 </form>
 <%-- 회원검색 로직 : 검색할 아이디 입력 받아서 
      호출 : /search, 방식 : get
