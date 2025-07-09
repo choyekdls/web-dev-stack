@@ -19,18 +19,25 @@ public class SearchServlet extends HttpServlet {
        
  
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		try {
 		String id = request.getParameter("id");
+		
 		MemberDAO dao = new MemberDAO();
+		
+		try {
+		
 		Member member = dao.searchMember(id);
+		
 		request.setAttribute("member", member);
+		request.getRequestDispatcher("/views/result.jsp").forward(request, response);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("result.jsp").forward(request, response);
+		
 	}
 
 }
