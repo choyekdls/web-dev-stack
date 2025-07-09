@@ -9,28 +9,40 @@ import jakarta.servlet.http.HttpSession;
 import vo.Member;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
-
+import dao.MemberDAO;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		
-		Member member = new Member();
-		member.setId(id);
-		member.setPwd(pwd);
-		request.setAttribute("member", member);
-		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("user", member);
-		
-		response.sendRedirect("index.jsp");
+
+		MemberDAO dao = new MemberDAO();
+
+		try {
+			Member member = dao.login(id, pwd);
+
+			// Session - 바인딩
+			HttpSession session = request.getSession();
+			session.setAttribute("member", member);
+
+			response.sendRedirect("/");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+//		Member member = new Member();
+//		member.setId(id);
+//		member.setPwd(pwd);
+//		request.setAttribute("member", member);
+
 	}
 
 }
