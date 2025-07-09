@@ -44,6 +44,25 @@ public class MemberDAO {
 
 		ps.executeUpdate();
 	}
+	
+	// 로그인
+	public Member login(String id, String pwd) throws SQLException {
+		Connection connect = connect();
+		
+		String query = "SELECT * FROM member WHERE id = ? AND pwd = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		
+		ps.setString(1, id);
+		ps.setString(2, pwd);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		Member member = null;
+		if(rs.next()) {
+			member = new Member(id, pwd, rs.getString("name"), rs.getInt("age"));
+		}
+		return member;
+	}
 
 	// 회원 검색
 	public Member searchMember(String id) throws SQLException {
@@ -59,7 +78,7 @@ public class MemberDAO {
 		Member member = null;
 		
 		if(rs.next()) {
-			member = new Member(rs.getString("id"), rs.getString("name"), rs.getString("pwd"), rs.getInt("age"));
+			member = new Member(id, rs.getString("name"), rs.getString("pwd"), rs.getInt("age"));
 		}
 		return member;
 	}
@@ -81,8 +100,9 @@ public class MemberDAO {
 			member.setName(rs.getString("name"));
 			member.setPwd(rs.getString("pwd"));
 			member.setAge(rs.getInt("age"));
+			list.add(member);
 		}
 		return list;
 	}
-
+	
 }
