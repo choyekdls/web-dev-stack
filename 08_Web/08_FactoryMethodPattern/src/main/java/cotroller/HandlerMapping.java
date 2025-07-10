@@ -1,6 +1,10 @@
 package cotroller;
 
+import cotroller.component.AllMemberController;
+import cotroller.component.LoginController;
+import cotroller.component.LogoutController;
 import cotroller.component.RegisterController;
+import cotroller.component.SearchController;
 
 /*
  * Controller들을 만들어내는 공장
@@ -27,7 +31,26 @@ public class HandlerMapping {
 		if(command.equals("register.do")) {
 			controller = new RegisterController();
 		}
+		
+		else if(command.equals("login.do")) {
+			controller = new LoginController();
+		}
+		
+		else if(command.equals("search.do")) {
+			controller = new SearchController();
+		}
+		
+		else if(command.equals("allMember.do")) {
+			controller = new AllMemberController();
+		}
+		
+		else if(command.equals("logout.do")) {
+			controller = new LogoutController();
+		}
 		return controller;
+		
+		
 	}
+	
 
 }
