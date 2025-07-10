@@ -22,6 +22,9 @@
 				<li><a href="/views/search.jsp">회원검색</a></li>
 				<li><a href="/front?command=allMember">전체 회원 보기</a></li>
 				<li><a href="/front?command=logout">로그아웃</a></li>
+				<%-- 물음표 뒤는 파라미터 값
+				     ?key=value 형식으로 쓰임
+				     --%>
 			</c:otherwise>
 		</c:choose>
 	</ul>
