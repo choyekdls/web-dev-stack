@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>로그인</h1>
-	<form action="/front" method="post">
+	<form action="/login.do" method="post">
 	    <input type="hidden" name="command" value="login">
 		<label> 아이디 : <input type="text" name="id" /></label><br> <label>
 			비밀번호 : <input type="password" name="pwd" />
