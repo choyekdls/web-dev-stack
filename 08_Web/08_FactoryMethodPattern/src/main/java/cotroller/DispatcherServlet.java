@@ -5,15 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import vo.Member;
-
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
-
-import dao.MemberDAO;
 
 /*
  * Factory Method Pattern
@@ -51,59 +43,6 @@ public class DispatcherServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	}
-
-	protected String login(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-
-		MemberDAO dao = new MemberDAO();
-		Member member = dao.login(id, pwd);
-
-		HttpSession session = request.getSession();
-		session.setAttribute("member", member);
-
-		return "index.jsp";
-
-	}
-
-	protected String search(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-
-		MemberDAO dao = new MemberDAO();
-
-		try {
-
-			Member member = dao.searchMember(id);
-			request.setAttribute("member", member);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "/views/result.jsp";
-	}
-
-	protected String allMember(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			MemberDAO dao = new MemberDAO();
-			List<Member> list = dao.allMemer();
-			request.setAttribute("list", list);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "/views/allMember.jsp";
-	}
-
-	protected String logout(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-
-		Member member = (Member) session.getAttribute("member");
-		if (member != null) {
-			session.invalidate();
-		}
-		return "index.jsp";
 	}
 
 }
