@@ -5,4 +5,7 @@
 SELECT * FROM member WHERE id = #{id}
 </select>
 
+<select id="idBoolCheck" parameterType="String" resultType="Boolean">
+SELECT EXISTS(SELECT * FROM member WHERE id=#{id});
+</select>
 </mapper>

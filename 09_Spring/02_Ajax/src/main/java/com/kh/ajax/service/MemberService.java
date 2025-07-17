@@ -15,7 +15,13 @@ public class MemberService implements MemberMapper {
 	@Override
 	public Member idCheck(String id) {
 		
-		return null;
+		return mapper.idCheck(id);
+	}
+
+	@Override
+	public boolean idBoolCheck(String id) {
+		
+		return mapper.idBoolCheck(id);
 	}
 
 }

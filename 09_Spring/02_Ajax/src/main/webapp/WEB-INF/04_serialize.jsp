@@ -9,26 +9,24 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-   <h1>회원가입</h1>
-    아이디 : <input type="text" id="id">
-    <input type="button" value="중복체크" id="idCheck">
-    <span id="idCheckView"></span>
-    <!-- 중복체크 버튼 눌렀을 때 post 방식으로 
-		 /check로 id 값 넘겨서 결과값(boolean)을 받아서
-         아이디가 있으면 ID 사용 불가, 없으면 ID 사용 가능
-		 스키마 : work, 테이블 : member -->
-	
+    <h1>회원가입</h1>
+	<form id="frm">
+		아이디 : <input type="text" name="id" id="id"><br>
+		비밀번호 : <input type="password" name="pwd" id="pwd"><br>
+	    이름 : <input type="text" name="name" id="name"><br>
+		<input type="button" value="회원가입" id="btn" /><br>
+	</form>
 	<script>
-		$("#idCheck").click(() => {
+		$("#btn").click(() => {
 			const userId = $("#id").val();
 			
 			$.ajax({
 				type: "post",
-				url: "/check",
-				data: "id=" + userId,
+				url: "/signup"
+				data: $("#frm").serialize(),
 				
 				success : function(response) {
-					if(!response) {
+					if(response) {
 					$("#idCheckView").text("ID 사용 가능");
 				} else {
 					$("#idCheckView").text("ID 사용 불가");

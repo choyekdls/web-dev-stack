@@ -7,5 +7,6 @@ import com.kh.ajax.vo.Member;
 @Mapper
 public interface MemberMapper {
 	Member idCheck(String id);
+	boolean idBoolCheck(String id);
 
 }

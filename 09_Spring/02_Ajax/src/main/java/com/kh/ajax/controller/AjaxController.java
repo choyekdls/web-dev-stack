@@ -40,8 +40,20 @@ public class AjaxController {
 	@ResponseBody
 	@PostMapping("/check")
 	public boolean check(String id) {
-		Member member = service.idCheck(id);
-		if(member != null) return true;
+		System.out.println("컨트롤러");
+		//Member member = service.idCheck(id);
+		//if(member != null) return true;
+		return service.idBoolCheck(id);
+	}
+	
+	@ResponseBody
+	@PostMapping("/signup")
+	public boolean check(Member vo) {
+		//Member member = service.idCheck(id);
+		//if(member != null) return true;
+		System.out.println(vo.getId());
+		System.out.println(vo.getPwd());
+		//return service.idBoolCheck(vo.getId());
 		return false;
 	}
 	}
