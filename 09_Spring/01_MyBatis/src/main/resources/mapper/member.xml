@@ -18,6 +18,7 @@
     SELECT * FROM member
      
     <where>
+    <!--
     <if test="select == 'all'">
      id LIKE CONCAT('%', #{keyword}, '%')
      OR name LIKE CONCAT('%', #{keyword}, '%')
@@ -27,7 +28,21 @@
     </if>  
     <if test="select == 'name'">
      name LIKE CONCAT('%', #{keyword}, '%')
-    </if>  
+    </if>
+    -->  
+    <choose>
+    <when test="select == 'all'">
+     id LIKE CONCAT('%', #{keyword}, '%')
+     OR name LIKE CONCAT('%', #{keyword}, '%')
+     </when>
+    <when test="select == 'id'"> 
+     id LIKE CONCAT('%', #{keyword}, '%')
+     </when>
+    <when test="select == 'name'">
+     name LIKE CONCAT('%', #{keyword}, '%')
+     </when>
+	<!--<otherwise></otherwise> 쓸 수 있음 -->
+    </choose>
     </where>
     </select>
     
@@ -71,5 +86,14 @@
     <delete id="delete" parameterType="String">
     DELETE FROM member
     WHERE id = #{id} 
+    </delete>
+    
+    <!-- foreach : 동적 쿼리를 구현할 때 컬렉션에 대한 반복 처리 제공 -->
+    <delete id="selectDelete" parameterType="ArrayList">
+    DELETE FROM member
+    WHERE id IN 
+    <foreach collection="idList" item="id" open="(" close=")" separator=",">
+    #{id}
+    </foreach>
     </delete>
 </mapper>
