@@ -18,4 +18,5 @@ public interface MemberMapper {
     List<Member> allMember();
     void update(Member vo);
     void delete(String id);
+    void selectDelete(List<String> idList);
 }
