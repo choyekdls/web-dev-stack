@@ -1,0 +1,38 @@
+:root {
+  --login-width: 400px;
+  --login-height: 400px;
+  --newin-height: 150px;
+}
+
+body {
+  background-color: rgb(224, 223, 223);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginpage {
+  padding-top: 200px;
+}
+
+#loginbox {
+  border: rgb(34, 58, 29);
+  border-radius: 30px;
+  background-color: rgb(34, 58, 29, 0.5);
+  width: var(--login-width);
+  height: var(--login-height);
+}
+
+#newin {
+  padding-top: 20px;
+}
+
+#newinbox {
+  border: white;
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255, 0.3);
+  width: var(--login-width);
+  height: var(--newin-height);
+}
