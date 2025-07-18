@@ -48,12 +48,10 @@ public class AjaxController {
 	
 	@ResponseBody
 	@PostMapping("/signup")
-	public boolean check(Member vo) {
-		//Member member = service.idCheck(id);
-		//if(member != null) return true;
-		System.out.println(vo.getId());
-		System.out.println(vo.getPwd());
-		//return service.idBoolCheck(vo.getId());
-		return false;
+	public Member check(Member vo) {
+		service.register(vo);
+		return vo;
 	}
+	
+	
 	}

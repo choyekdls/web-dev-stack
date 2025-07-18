@@ -8,5 +8,6 @@ import com.kh.ajax.vo.Member;
 public interface MemberMapper {
 	Member idCheck(String id);
 	boolean idBoolCheck(String id);
+	void register(Member vo);
 
 }
