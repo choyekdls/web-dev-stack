@@ -9,14 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <h1>로그인 페이지</h1>
-	<a href="/register">회원가입 페이지로 이동</a>
-	<button id="btn" type="button">회원가입 페이지로 이동</button>
+    <h1>회원가입 페이지</h1>
 	
-	<script>
-		$("#btn").click(() => {
-			location.href="/register";
-		});
-	</script>
 </body>
 </html>

@@ -53,5 +53,12 @@ public class AjaxController {
 		return vo;
 	}
 	
+	@ResponseBody
+	@PostMapping("/register")
+	public Member register(Member vo) {
+		
+		return vo;
+	}
+	
 	
 	}

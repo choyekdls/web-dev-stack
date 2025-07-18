@@ -12,10 +12,10 @@ public class PageController {
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
 
-//		// 사용자가 로그인을 했는지 안했는지
-//		if(session.getAttribute("user") == null) {
-//			return "redirect:/login";
-//		}
+        //사용자가 로그인을 했는지 안했는지
+		if(session.getAttribute("user") == null) {
+			return "redirect:/login";
+		}
 
 		model.addAttribute("component", "../component/main.jsp");
 		return "/common/layout";
@@ -26,10 +26,13 @@ public class PageController {
 		return "/page/login";
 	}
 
-	@GetMapping("/example")
-	public String example(Model model) {
-		model.addAttribute("component", "../component/example.jsp");
-		return "/common/layout";
+	@GetMapping("/register")
+	public String register() {
+		return "/page/register";
 	}
-
+	
+	@GetMapping("/sale")
+	public String sale(Model model) {
+	model.addAttributes("component", "../component", " ../component/page/sale.jsp");
+	}
 }
