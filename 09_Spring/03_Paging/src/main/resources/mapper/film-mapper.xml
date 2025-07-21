@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.paging.mapper.FilmMapper">
+
+<resultMap id="FilmMap" type="Film">
+<id property="id" column="film_id" />
+<id property="title" column="title" />
+<id property="desc" column="description" />
+</resultMap>
+
+<select id="showFilm" resultMap="FilmMap">
+SELECT * FROM film_text 
+</select>
+</mapper>
