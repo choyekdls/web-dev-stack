@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.kh.paging.dto.PagingDTO;
 import com.kh.paging.service.FilmService;
 
 
@@ -13,12 +14,16 @@ public class FilmController {
 
 	@Autowired
 	private FilmService service;
-	
-	@GetMapping("/list")
-	public String showFilm(Model model) {
-		model.addAttribute("list",service.showFilm());
-		return "list";
-	}
-		
-	}
 
+	//session 에 담은 값은 서버가 종료될 때까지, model 에 담은 값은 한 번 보내고 끝
+	@GetMapping("/list")
+	public String showFilm(Model model, PagingDTO paging) {
+		model.addAttribute("list", service.showFilm(paging));
+		model.addAttribute("paging",paging);
+		return "list";
+	}		
+}
+		//List<Film> list = service.showFilm(paging);
+        //model.addAttribute("list", list);
+        //model.addAttribute("paging",new PagingDTO(paging.getPage()));
+        //return "list";

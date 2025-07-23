@@ -3,11 +3,17 @@
 
 <resultMap id="FilmMap" type="Film">
 <id property="id" column="film_id" />
-<id property="title" column="title" />
-<id property="desc" column="description" />
+<result property="title" column="title" />
+<result property="desc" column="description" />
 </resultMap>
 
-<select id="showFilm" resultMap="FilmMap">
+<select id="showFilm" parameterType="PagingDTO" resultMap="FilmMap">
 SELECT * FROM film_text 
+LIMIT #{offset}, #{limit}
+</select>
+
+<!-- vo에 있는 total 값을 가져오기 위한 SELECT문 -->
+<select id="total">
+SELECT count(*) FROM film_text
 </select>
 </mapper>
