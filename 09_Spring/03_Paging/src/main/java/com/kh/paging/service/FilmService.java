@@ -28,4 +28,8 @@ public class FilmService {
 		paging.setOffset(paging.getLimit() * (paging.getPage()-1));
 		return mapper.showFilm(paging);
 	}
+	
+	public int total() {
+		return mapper.total();
+	}
 }
