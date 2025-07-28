@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.paging.mapper.FilmMapper">
+
+<resultMap id="FilmMap" type="Film">
+<id property="id" column="film_id" />
+<result property="title" column="title" />
+<result property="desc" column="description" />
+</resultMap>
+
+<select id="showFilm" parameterType="PagingDTO" resultMap="FilmMap">
+SELECT * FROM film_text 
+LIMIT #{offset}, #{limit}
+</select>
+
+<!-- vo에 있는 total 값을 가져오기 위한 SELECT문 -->
+<select id="total">
+SELECT count(*) FROM film_text
+</select>
+</mapper>

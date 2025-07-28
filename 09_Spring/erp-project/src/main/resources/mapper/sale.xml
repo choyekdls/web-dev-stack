@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.mapper.SaleMapper">
+
+<!-- vo명과 sql 단어 일치 시키기 -->
+<resultMap id="SaleMap" type="Sale">
+<id property="saleNo" column="sale_no" />
+<id property="productName" column="product_name" />
+<id property="category" column="category" />
+<id property="gender" column="gender" />
+<id property="quantity" column="quantity" />
+<id property="varAmount" column="var_amount" />
+<id property="totalAmount" column="total_amount" />
+</resultMap>
+
+<insert id="addSale" parameterType="Sale">
+INSERT INTO sale(sale_date, product_name, category, gender, quantity, var_amount, total_amount)
+VALUES(#{saleDate}, #{productName}. #{category}, #{gender}, #{quantity}, #{varAmount}, #{totalAmount})
+</insert>
+<select id="viewSale" resultMap="SaleMap">
+SELECT * FROM sale
+</select>
+</mapper>

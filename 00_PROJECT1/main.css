@@ -1,0 +1,36 @@
+:root {
+  --side-width: 250px;
+  --header-height: 120px;
+}
+
+.side {
+  position: fixed;
+  background-color: rgb(34, 58, 29);
+  width: var(--side-width);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding-top: 30px;
+}
+
+.main {
+  padding-left: var(--side-width);
+}
+
+.main header {
+  position: fixed;
+  background-color: whitesmoke;
+  width: 100%;
+  height: var(--header-height);
+}
+
+.main header h1 {
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+.main section {
+  position: fixed;
+  padding-top: var(--header-height);
+}

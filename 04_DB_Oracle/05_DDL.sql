@@ -317,7 +317,7 @@ SELECT * FROM MEM_GRADE;
 /*
   DEFAULT 기본값
   - 제약조건 아님!
-  - 컬럼을 선정하지 않고 INSERT 시 NULL이 아닌 기본값을 INSERT 하고자 할 때 세팅해둘 수 있는 값
+  - 컬럼을 선정하지 않고  시 NULL이 아닌 기본값을 INSERT 하고자 할 때 세팅해둘 수 있는 값
   - 값을 따로 설정하면 설정한 값, 따로 설정하지 않을 시 DEFAULT 값
 */
 
