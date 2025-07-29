@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<title>게시글 목록</title>
@@ -15,21 +16,22 @@
 		<h1>List Page</h1>
 		<table class="table">
 			<thead>
-				
+				<tr>
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성시간</th>
-				
+				</tr>
 			</thead>
-			
-			<c:forEach items="${list}" var="item" >
-			
+									
 			<tbody>
-				<td>${item.no}</td>
-				<td>${item.title}</td>
-				<td>${item.createdAt}</td>
-			</tbody>
-			</c:forEach>
+				<c:forEach items="${list}" var="board" >
+				<tr>
+				<td>${board.no}</td>
+				<td><a href="/view?no=${board.no}">${board.title}</td>
+				<td><fmt:formatDate value="${board.formatDate}" pattern="yyyy-MM-dd"/></td>
+				</tr>
+			    </c:forEach>
+		    </tbody>
 		</table>
 		
 		<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#writeModal">글쓰기</button>

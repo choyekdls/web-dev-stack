@@ -77,14 +77,24 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list() {
+	public String list(Model model) {
+		List<BoardDTO> list = service.allBoard();
+		model.addAttribute("list", list);
 		return "/list";
 	}
 	
+	// @PostMapping("/write)
+//	public String write(String title, String content, MultipartFile file) {
+//		return "redirect:/list";
+//	}
+	
 	@PostMapping("/write")
 	public String uploadBoard(BoardDTO dto) {
-		String url = fileUpload(dto.getFile());
 		
+		// 이미지 업로드 추가
+		String url = fileUpload(dto.getFile());
+				
+		// board 테이블에 데이터 추가
 		Board board = new Board();
 		board.setTitle(dto.getTitle());
 		board.setContent(dto.getContent());
@@ -93,7 +103,31 @@ public class BoardController {
 		System.out.println(board.getContent());
 		System.out.println(board.getUrl());
 		service.uploadBoard(board);
-	    return "/list";
+		
+		System.out.println(board);
+		
+	    return "redirect:/view?no=" + board.getNo();
 	}
+	
+	// a링크 눌렀을 때 내용 보이게
+	
+	@GetMapping("/view")
+	// 데이터 보여줘야지~ 한다면 Model을 씁시다..항상 모델에 담아주는 것이에요
+	public String select(int no, Model model) {
+		
+		Board board = service.select(no);
+		model.addAttribute("board", board);
+		return "/view";
+		
+	}
+	
+	// 게시글 수정
+	
+	// 게시글 삭제
+	
+
+	
+	
+	
 
 }

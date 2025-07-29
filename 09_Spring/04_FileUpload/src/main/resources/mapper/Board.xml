@@ -9,12 +9,12 @@
 <result property="createdAt" column="created_at"/>
 </resultMap>
 
-<insert id="uploadBoard" parameterType="Board">
+<insert id="uploadBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
 INSERT INTO board(title,content,url)
 VALUES(#{title},#{content},#{url})
 </insert>
 
-<select id="allboard" parameterType="Board" resultMap="boardMap">
+<select id="allBoard" resultMap="boardMap">
 SELECT * FROM board
 </select>
 
