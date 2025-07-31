@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.upload.dto.BoardDTO;
+import com.kh.upload.dto.PagingDTO;
 import com.kh.upload.mapper.BoardMapper;
 import com.kh.upload.vo.Board;
 
@@ -23,8 +24,10 @@ public class BoardService {
 		
 	}
 
-	public List<BoardDTO> allBoard() {
-		List<Board> list = mapper.allBoard();
+	public List<BoardDTO> allBoard(PagingDTO paging) {
+		paging.setOffset(paging.getLimit() * (paging.getPage()-1));
+		List<Board> list = mapper.allBoard(paging);
+		
 		List<BoardDTO> dtoList = new ArrayList<BoardDTO>();
 		for(Board b : list) {
 			BoardDTO dto = new BoardDTO();
@@ -36,6 +39,10 @@ public class BoardService {
 			//dto 다시 dtoList에 담아주기
 		}
 		return dtoList;
+	}
+	
+	public int total(String keyword) {
+		return mapper.total(keyword);
 	}
 
 	public Board select(int no) {

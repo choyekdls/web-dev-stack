@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.upload.dto.PagingDTO;
 import com.kh.upload.Service.BoardService;
 import com.kh.upload.dto.BoardDTO;
 import com.kh.upload.vo.Board;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class BoardController {
@@ -77,10 +76,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<BoardDTO> list = service.allBoard();
+	public String list(Model model, PagingDTO paging) {
+		List<BoardDTO> list = service.allBoard(paging);
 		model.addAttribute("list", list);
+		 model.addAttribute("paging",new PagingDTO(paging.getPage(), service.total(paging.getKeyword())));
 		return "/list";
+		
 	}
 	
 	// @PostMapping("/write)

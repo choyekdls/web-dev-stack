@@ -17,5 +17,6 @@ public class BoardDTO {
 	private String url;
 	private Date formatDate;
 	private MultipartFile file;
+	
 
 }
