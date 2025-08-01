@@ -13,7 +13,7 @@
 	
 <h1>토마토 페이지</h1>
 <!-- get, /myPage : 인증된 사람만 즉! 로그인된 사람만 -->
-<p><sec:authentication property="name" /> 님의 페이지입니다.</p>
-	
+<p>아이디 : <sec:authentication property="principal.id"/></p>
+<p><sec:authentication property="principal.name"/> 님의 페이지입니다.</p>	
 </body>
 </html>
