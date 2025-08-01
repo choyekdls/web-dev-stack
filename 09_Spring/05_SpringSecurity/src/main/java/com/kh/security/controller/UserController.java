@@ -1,6 +1,8 @@
 package com.kh.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,13 +11,12 @@ import com.kh.security.service.UserService;
 import com.kh.security.vo.User;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	private UserService service;
+	private UserService userService;
 	
 	// index 페이지 열기
 	@GetMapping("/index")
@@ -29,23 +30,35 @@ public class UserController {
 	
 	
 	@GetMapping("/login")
-	public String login() {
-		return "/login";
+	public void login() {
+	}
+	
+	@GetMapping("/myPage")
+	public void myPage() {
+		
+	}
+	
+	@GetMapping("/admin")
+	public void admin() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		System.out.println(user);
+		
+		
 	}
 	
 	@PostMapping("/register")
 	public String register(User user) {
-		service.register(user);
-		return "index";
+		System.out.println(user);
+		userService.register(user);
+		return "redirect:/login";
 	}
 
 	@PostMapping("/login")
 	public String login(String user, HttpServletRequest request) {
-		User u = service.login(user);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("user", u);
-		return "redirect:/index";
+		return "redirect:/myPage";
 	}
 	
 }

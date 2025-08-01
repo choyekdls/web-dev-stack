@@ -10,16 +10,10 @@
 <body>
 <h1>회원가입</h1>
 
-<form action="/register" mehtod="post">
+<form action="/register" method="post">
 	아이디 : <input type="text" id="id" name="id"><br>
-	비밀번호 : <input type="text" id="pwd" name="pwd"><br>
+	비밀번호 : <input type="password" id="pwd" name="pwd"><br>
 	이름 : <input type="text" id="name" name="name"><br>
-	role : 
-	<select name="select">
-		<option value="admin">관리자</option>
-		<option value="member">회원</option>
-		</select>
-	<input type="text" id="role" name="role"><br>
 	<input type="submit" value="회원가입">
 </form>
 
