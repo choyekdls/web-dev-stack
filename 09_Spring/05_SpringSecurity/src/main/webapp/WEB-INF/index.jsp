@@ -12,12 +12,14 @@
 <body>
 	
 <h1>토마토</h1>
-
+    <div id="anonymous" style="display: none;">
     <sec:authorize access="isAnonymous()">
 	<button id="login">로그인</button><br>
 	<button id="register">회원가입</button><br>
 	</sec:authorize>
+	</div>
 	
+	<div id="authenticated" style="display: none;">
 	<sec:authorize access="isAuthenticated()">
 	<button id="logout">로그아웃</button><br>
 	<button id="myPage">마이 페이지</button><br>
@@ -26,6 +28,7 @@
 	<sec:authorize access="hasRole('ADMIN')">
     <button id="admin">관리자 페이지</button><br>
 	</sec:authorize>
+	</div>
 	
 <script>
 	$("#register").click(() => {
@@ -47,6 +50,16 @@
 	$("#myPage").click(() => {
 		location.href="/myPage"
 	});
+	
+    const token = localStorage.getItem("token");
+	
+	if(token !== null){
+		$("#authenticated").show();
+	} else {
+		$("#anonymous").show();
+	}
+	
+	
 </script>
 
 </body>
