@@ -10,4 +10,6 @@ VALUES(#{id}, #{pwd}, #{name}, #{role})
 SELECT * from user
 WHERE id = #{id}
 </select>
+
+
 </mapper>

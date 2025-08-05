@@ -20,7 +20,7 @@
 
 <script>
 	$("#login").click ((e) => {
-		e.preventDefalut(); // 기존 이벤트 제거
+		e.preventDefault(); // 기존 이벤트 제거
 		
 		$.ajax ({
 			type:'post',
@@ -31,7 +31,7 @@
 				// localStorage에 token 키 값으로 저장
 				localStorage.setItem("token", data);
 				// / <- index.jsp로 이동
-				location.href="/index";
+				location.href="/";
 			}, 
 		});
 	});

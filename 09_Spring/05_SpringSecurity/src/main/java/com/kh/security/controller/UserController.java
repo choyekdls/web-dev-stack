@@ -50,7 +50,6 @@ public class UserController {
 	@GetMapping("/admin")
 	public void admin() {
 		
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		System.out.println(user);	
@@ -73,7 +72,12 @@ public class UserController {
 			String token = tokenProvider.create(u);
 			return token;
 		}
-		return "redirect:/";
+		return null;
 	}
 	
+	@ResponseBody
+	@GetMapping("/check")
+	public User check(String token) {
+		return tokenProvider.validate(token);
+	}
 }
