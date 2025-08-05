@@ -1,4 +1,5 @@
-package com.project.erp.controller;
+package com.project.erp.finance.controller;
+
 
 import java.util.List;
 
