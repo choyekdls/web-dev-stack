@@ -1,0 +1,72 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.practice.mapper.ClaimMapper">
+
+<resultMap id="ClaimMap" type="Claim">
+<id property="claimNo" column="claim_no"/>
+<result property="name" column="name"/>
+<result property="bookNo" column="book_no"/>
+<result property="title" column="title"/>
+<result property="price" column="price"/>
+<result property="quantity" column="quantity"/>
+<result property="totalAmount" column="total_amount"/>
+<result property="defectType" column="defect_type"/>
+<result property="recall" column="recall"/>
+<result property="recallStatus" column="recall_status"/>
+<result property="content" column="content"/>
+<result property="claimDate" column="claim_date"/>
+<result property="reason" column="reason"/>
+</resultMap>
+
+<!-- 신규 클레임 등록 -->
+<insert id="newClaim" parameterType="Claim" useGeneratedKeys="true" keyProperty="bookNo">
+INSERT INTO claim(partner_no, name, title, book_no, price, quantity, total_amount, defect_type, recall, recall_status, content, claim_date)
+VALUES(#{partnerNo}, #{name}, #{title}, #{bookNo}, #{price}, #{quantity}, #{totalAmount}, #{defectType}, #{recall}, #{recallStatus}, #{content}, #{claimDate})
+</insert>
+
+<!-- 특정 클레임 검색 조회 -->
+<select id="searchClaim" resultMap="ClaimMap">
+SELECT * FROM claim
+<where>
+<choose>
+
+<when test="select == 'name'">
+name LIKE CONCAT('%', #{keyword}, '%')
+</when>
+
+<when test="select == 'title'">
+title LIKE CONCAT('%', #{keyword}, '%')
+</when>
+</choose>
+</where>
+</select>
+
+<!-- 전체 클레임 조회 -->
+<select id="allClaim" resultMap="ClaimMap">
+SELECT * FROM claim
+</select>
+
+<select id="selectClaim" parameterType="int" resultMap="ClaimMap">
+SELECT * FROM claim
+WHERE claim_no = #{claimNo}
+</select>
+
+<!-- 기존 클레임 내용 수정 -->
+<update id="updateClaim" parameterType="Claim">
+UPDATE claim
+SET quantity = #{quantity},
+    total_amount = #{totalAmount},
+    defect_type = #{defectType},
+    content = #{content},
+    recall = #{recall},
+    recall_status = #{recallStatus},
+    claim_date = #{claimDate}
+WHERE claim_no = #{claimNo}
+</update>
+
+<!-- 데이터 삭제 -->
+<delete id="deleteClaim" parameterType="int">
+DELETE FROM claim
+WHERE claim_no = #{claimNo}
+</delete>
+
+</mapper>

@@ -31,8 +31,5 @@ public class PageController {
 		return "/page/register";
 	}
 	
-	@GetMapping("/sale")
-	public String sale(Model model) {
-	model.addAttributes("component", "../component", " ../component/page/sale.jsp");
-	}
+	
 }
