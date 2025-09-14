@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="tableWrap">
+      <table class="poTable">
+        <thead>
+          <tr>
+            <th>선택</th>
+            <th>발주일자</th>
+            <th>담당자</th>
+            <th>납품일자</th>
+            <th>발행일자</th>
+            <th>구분</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach var="printOrder" items="${list}">
+            <tr class="order-summary">
+              <td>
+                <input
+                  type="radio"
+                  name="orderNo"
+                  value="${printOrder.orderNo}"
+                />
+              </td>
+              <td>${printOrder.orderDate}</td>
+              <td>${printOrder.manager}</td>
+              <td>${printOrder.deliveryDate}</td>
+              <td>${printOrder.issueDate}</td>
+              <td>${printOrder.category}</td>
+            </tr>
+
+            <tr class="order-details" style="display: none">
+              <td colspan="6">
+                <table border="1" width="100%">
+                  <thead>
+                    <tr>
+                      <th>제품명</th>
+                      <th>정가</th>
+                      <th>수량</th>
+                      <th>홍보부수</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <c:forEach var="detail" items="${printOrder.detailList}">
+                      <tr>
+                        <td>${detail.productName}</td>
+                        <td>${detail.regularPrice}</td>
+                        <td>${detail.quantity}</td>
+                        <td>${detail.promotionQuantity}</td>
+                      </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

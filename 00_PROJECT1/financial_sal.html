@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>급여/상여금 관리</title>
+    <link rel="stylesheet" href="financial_sal.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <!-- ============ 상단 타이틀 + 우측 버튼 ============ -->
+    <section class="box" style="display: flex; align-items: center; gap: 12px">
+      <h1 style="margin: 0">급여/상여금 관리</h1>
+      <div class="btn-wrap" style="margin-left: auto">
+        <button id="add" type="button" class="btnNavy">사원 추가</button>
+        <button id="delete" type="button" class="btnGray">선택 삭제</button>
+      </div>
+    </section>
+
+    <!-- ============ 급여내역(요약/기본정보) ============ -->
+    <form id="payForm" action="/payroll/new" method="post">
+      <section class="box">
+        <h2 style="margin-top: 0">급여내역</h2>
+        <div class="form-inline" style="row-gap: 12px; column-gap: 12px">
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="memberNo">사번</label>
+            <input type="text" id="memberNo" name="memberNo" />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="memberName">성명</label>
+            <input type="text" id="memberName" name="memberName" />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="deptName">부서명</label>
+            <input type="text" id="deptName" name="deptName" />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="position">직책</label>
+            <input type="text" id="position" name="position" />
+          </div>
+
+          <!-- 근로일수/시간 -->
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="workingDays">근로일수(일)</label>
+            <input
+              type="number"
+              id="workingDays"
+              name="workingDays"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="workingHours">근로시간(시간)</label>
+            <input
+              type="number"
+              id="workingHours"
+              name="workingHours"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+
+          <!-- 자동계산 필드: 읽기전용 -->
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="totalSalary">급여합계</label>
+            <input type="number" id="totalSalary" name="totalSalary" readonly />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="totalDeduction">공제액계</label>
+            <input
+              type="number"
+              id="totalDeduction"
+              name="totalDeduction"
+              readonly
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="actualPay">실지급액</label>
+            <input type="number" id="actualPay" name="actualPay" readonly />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 지급항목 ============ -->
+      <section class="box">
+        <h2 style="margin-top: 0">지급항목</h2>
+        <div class="form-inline" style="row-gap: 12px; column-gap: 12px">
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="salary">기본급</label>
+            <input
+              type="number"
+              id="salary"
+              name="salary"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="foodCharge">식대</label>
+            <input
+              type="number"
+              id="foodCharge"
+              name="foodCharge"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="otPay">연장수당</label>
+            <input
+              type="number"
+              id="otPay"
+              name="otPay"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="bonus">기타 상여금</label>
+            <input
+              type="number"
+              id="bonus"
+              name="bonus"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 공제항목 ============ -->
+      <section class="box">
+        <h2 style="margin-top: 0">공제항목</h2>
+        <div class="form-inline" style="row-gap: 12px; column-gap: 12px">
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="taxAdjIncome">정산소득세</label>
+            <input
+              type="number"
+              id="taxAdjIncome"
+              name="taxAdjIncome"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="taxAdjResident">정산주민세</label>
+            <input
+              type="number"
+              id="taxAdjResident"
+              name="taxAdjResident"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="incomeTax">소득세</label>
+            <input
+              type="number"
+              id="incomeTax"
+              name="incomeTax"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="residentTax">주민세</label>
+            <input
+              type="number"
+              id="residentTax"
+              name="residentTax"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="healthInsurance">건강보험</label>
+            <input
+              type="number"
+              id="healthInsurance"
+              name="healthInsurance"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="nursingInsurance">장기요양보험</label>
+            <input
+              type="number"
+              id="nursingInsurance"
+              name="nursingInsurance"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="nationalPension">국민연금</label>
+            <input
+              type="number"
+              id="nationalPension"
+              name="nationalPension"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="employmentInsurance">고용보험</label>
+            <input
+              type="number"
+              id="employmentInsurance"
+              name="employmentInsurance"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="healthAdj">건강보험정산액</label>
+            <input
+              type="number"
+              id="healthAdj"
+              name="healthAdj"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="nursingAdj">요양보험정산액</label>
+            <input
+              type="number"
+              id="nursingAdj"
+              name="nursingAdj"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+          <div class="inputGroup" style="flex: 1; min-width: 220px">
+            <label for="employmentAdj">고용보험정산액</label>
+            <input
+              type="number"
+              id="employmentAdj"
+              name="employmentAdj"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+        </div>
+
+        <div class="submit">
+          <button id="create" type="submit">저장</button>
+          <button
+            id="cancel"
+            type="button"
+            class="btnGray"
+            onclick="history.back()"
+          >
+            취소
+          </button>
+        </div>
+      </section>
+    </form>
+
+    <!-- ============ 급여 목록(선택 삭제용) ============ -->
+    <section class="box">
+      <h2 style="margin-top: 0">등록된 급여 목록</h2>
+      <form id="deleteForm" action="/payroll/delete" method="post">
+        <div class="tableWrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="checkAll" /></th>
+                <th>사번</th>
+                <th>성명</th>
+                <th>부서</th>
+                <th>직책</th>
+                <th>실지급액</th>
+                <th>근로(일/시간)</th>
+                <th>상세</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="p" items="${payrollList}">
+                <tr>
+                  <td>
+                    <input type="checkbox" name="ids" value="${p.payrollId}" />
+                  </td>
+                  <td>${p.memberNo}</td>
+                  <td>${p.memberName}</td>
+                  <td>${p.deptName}</td>
+                  <td>${p.position}</td>
+                  <td>${p.actualPay}</td>
+                  <td>${p.workingDays} / ${p.workingHours}</td>
+                  <td>
+                    <a
+                      href="/payroll/${p.payrollId}"
+                      class="btnNavy"
+                      style="padding: 4px 8px"
+                      >보기</a
+                    >
+                  </td>
+                </tr>
+              </c:forEach>
+              <c:if test="${empty payrollList}">
+                <tr>
+                  <td colspan="8">등록된 급여 데이터가 없습니다.</td>
+                </tr>
+              </c:if>
+            </tbody>
+          </table>
+        </div>
+      </form>
+      <div class="bottomBtn">
+        <button type="button" id="delete2" class="delete">선택 삭제</button>
+      </div>
+    </section>
+
+    <!-- ============ 스크립트 ============ -->
+    <script>
+      // jQuery 안전하게
+      $(function () {
+        // 사원 추가
+        $("#add").on("click", function () {
+          location.href = "/addMember";
+        });
+
+        // 전체 체크
+        $("#checkAll").on("change", function () {
+          const checked = $(this).is(":checked");
+          $('input[name="ids"]').prop("checked", checked);
+        });
+
+        // 선택 삭제 (상단/하단 버튼 둘 다 지원)
+        $("#delete, #delete2").on("click", function () {
+          const $checked = $('input[name="ids"]:checked');
+          if ($checked.length === 0) {
+            alert("삭제할 항목을 선택하세요.");
+            return;
+          }
+          if (!confirm($checked.length + "건을 삭제하시겠습니까?")) return;
+
+          // 폼 제출
+          $("#deleteForm").trigger("submit");
+        });
+
+        // 음수 방지 & 자동계산
+        const positiveFields = [
+          "#workingDays",
+          "#workingHours",
+          "#salary",
+          "#foodCharge",
+          "#otPay",
+          "#bonus",
+          "#taxAdjIncome",
+          "#taxAdjResident",
+          "#incomeTax",
+          "#residentTax",
+          "#healthInsurance",
+          "#nursingInsurance",
+          "#nationalPension",
+          "#employmentInsurance",
+          "#healthAdj",
+          "#nursingAdj",
+          "#employmentAdj",
+        ];
+
+        $(document).on("input", positiveFields.join(","), function () {
+          const v = Number($(this).val());
+          if (v < 0) $(this).val(0);
+          recalc();
+        });
+
+        function n(id) {
+          return Number($(id).val() || 0);
+        }
+
+        function recalc() {
+          // 지급합계
+          const totalSalary =
+            n("#salary") + n("#foodCharge") + n("#otPay") + n("#bonus");
+          // 공제합계
+          const totalDeduction =
+            n("#taxAdjIncome") +
+            n("#taxAdjResident") +
+            n("#incomeTax") +
+            n("#residentTax") +
+            n("#healthInsurance") +
+            n("#nursingInsurance") +
+            n("#nationalPension") +
+            n("#employmentInsurance") +
+            n("#healthAdj") +
+            n("#nursingAdj") +
+            n("#employmentAdj");
+
+          $("#totalSalary").val(totalSalary);
+          $("#totalDeduction").val(totalDeduction);
+          $("#actualPay").val(totalSalary - totalDeduction);
+        }
+
+        // 초기 계산
+        recalc();
+      });
+    </script>
+  </body>
+</html>

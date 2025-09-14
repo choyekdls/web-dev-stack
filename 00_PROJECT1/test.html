@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="test.css" />
+  </head>
+  <body>
+    <div class="top-icons">
+      <button class="iconBtn" aria-label="문서">
+        <!-- 문서 아이콘 예시 -->
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+          />
+          <path d="M14 2v6h6" />
+        </svg>
+      </button>
+
+      <!-- 프로필 메뉴 -->
+      <div class="profile-menu">
+        <button
+          class="iconBtn profile-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <!-- 사용자 아이콘 -->
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+          >
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+          </svg>
+        </button>
+
+        <!-- Hover 시 나타나는 패널 -->
+        <div class="profile-panel" role="menu">
+          <div class="profile-panel__arrow"></div>
+
+          <div class="profile-head">
+            <img
+              class="avatar"
+              src="https://via.placeholder.com/48"
+              alt="프로필 이미지"
+            />
+            <div class="meta">
+              <strong class="name">홍길동</strong>
+              <span class="email">gildong@example.com</span>
+            </div>
+          </div>
+
+          <div class="profile-info">
+            <dl>
+              <div>
+                <dt>부서</dt>
+                <dd>마케팅팀</dd>
+              </div>
+              <div>
+                <dt>직급</dt>
+                <dd>대리</dd>
+              </div>
+              <div>
+                <dt>사번</dt>
+                <dd>2024-001</dd>
+              </div>
+            </dl>
+
+            <div class="leave">
+              <span class="leave-label">남은 연차</span>
+              <span class="leave-count"><strong>8</strong>일</span>
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <button
+              type="button"
+              class="btnNavy"
+              onclick="openVacationModal && openVacationModal()"
+            >
+              휴가 신청
+            </button>
+            <button
+              type="button"
+              class="btnGray"
+              onclick="openOvertimeModal && openOvertimeModal()"
+            >
+              야근 신청
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="iconBtn" aria-label="로그아웃">
+        <!-- 로그아웃 아이콘 예시 -->
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          fill="none"
+        >
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <path d="M16 17l5-5-5-5" />
+          <path d="M21 12H9" />
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>

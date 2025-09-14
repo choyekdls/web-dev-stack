@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="salary.css">
+</head>
+    <section class="salary">
+		
+		<div class="salaryBox">
+		<h1>전직원 급여 검색 조회</h1>
+		<form action="/allSalary" method="post" class="salary-search-form">
+            <div class="form-inline">
+		     <select name="select">
+		       <option value="title">사원명</option>
+		       <option value="status">사원 번호</option>
+		     </select>
+		     <input type="text" name="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요" />
+		     <div class="btn-wrap">
+		       <input type="submit" value="조회" class="btnNavy" />
+		       <button type="button" class="btn navy small" onclick="openModal()">등록</button>
+		     </div>
+		   </div>
+		 </form>
+	
+         
+	<h1>급여 전체 조회</h1>
+    <div class="tableWrapper">
+	<table class="salaryTable">
+      <thead>  
+	  <tr>
+		<th>선택</th>
+		<th>직원</th>
+		<th>사원 번호</th>
+		<th>기본급</th>
+		<th>직책수당</th>
+		<th>식대</th>
+		<th>초과근무 수당</th>
+		<th>세금</th>
+		<th>적용 시작일</th>
+		<th>총 급여</th>
+	  </tr>
+    </thead>
+    <tbody>
+	  <c:forEach items="${salaryList}" var="salary">
+		<tr>
+			<td><input type="checkbox" name="salary" value="${salary.salaryNo}"></td>
+			<td>${salary.memberName}</td>
+			<td>${salary.memberNo}</td>
+			<td>${salary.baseSalary}</td>
+			<td>${salary.positionAllowance}</td>
+			<td>${salary.mealAllowance}</td>
+			<td>${salary.otRate}</td>
+			<td>${salary.tax}</td>
+			<td>${salary.effectiveDate}</td>
+			<td>${salary.totalSalary}</td>
+	    </tr>
+	  </c:forEach>
+    </tbody>
+	  </table> 	
+      </div>
+
+      <div class="bottomBtn" style="margin-top: 16px; display: flex; gap: 10px;"></div>
+	  <button class="update" type="button">수정</button>
+	  <button class="delete" type="button">삭제</button>
+      </div>
+    </div>
+      </section>
+    
+       <!-- 🟫 모달 영역 시작 -->
+	  <div id="defectModal" class="modal" style="display: none;">
+	    <div class="modal-content">
+	      <span class="close" onclick="closeModal()">&times;</span>
+
+	      <form action="/insertSalary" method="post" id="salaryForm">
+	        <h1>전직원 급여 등록</h1>
+
+            <div class="tableWrapper">
+	      적용 시작일 :<input type="date" name="effectiveDate" required>
+		
+			<table class="insertSalary">
+            <thead>
+			<tr>
+				<th>사번</th>
+				<th>이름</th>
+				<th>기본급</th>
+				<th>보너스</th>
+				<th>초과수당</th>
+				<th>세금</th>
+				<th>총 지급액</th>
+				<th>보너스 입력</th>
+			</tr>	
+			</thead>
+
+		<tbody>
+			<c:forEach var="mem" items="${memberList}">
+			    <tr>
+			        <td>${mem.memberNo}</td>
+			        <td>${mem.name}</td>
+			        <td class="baseSalary">${mem.baseSalary}</td>
+			        <td class="bonus">0</td>
+					    <td class="overtimePay">${mem.otRate}</td> <!-- 자동 계산된 값 -->
+			        <td class="tax">0</td>
+			        <td class="netPay">${mem.baseSalary}</td>
+			        <td>
+			            <button type="button" class="btn btn-sm btn-primary bonusBtn" data-bs-toggle="modal" data-bs-target="#bonusModal">입력</button>
+			            <input type="hidden" name="memberList[${mem.memberNo}].bonus" value="0">
+						<input type="hidden" name="memberList[${mem.memberNo}].otRate" value="0">
+			            <input type="hidden" name="memberList[${mem.memberNo}].tax" value="0">
+			            <input type="hidden" name="memberList[${mem.memberNo}].netPay" value="${mem.baseSalary}">
+			        </td>
+			    </tr>
+			</c:forEach>
+            </tbody>
+            </table>
+
+			<button type="submit">전직원 급여 등록</button>
+			</form>
+		
+    </div>
+
+	        <div class="submit">
+	          <button type="submit" id="submit">등록</button>
+	          <button type="button" class="cancel-btn" onclick="closeModal()">취소</button>
+	        </div>
+	      </form>
+	    </div>
+	  </div>
+      
+	  <!-- 🟫 모달 영역 끝 -->
+
+      <script>
+	    // 모달 열기
+	    function openModal() {
+	      document.getElementById("defectModal").style.display = "flex";
+	    }
+
+	    // 모달 닫기
+	    function closeModal() {
+	      document.getElementById("defectModal").style.display = "none";
+	    }
+
+	    // 등록 시 품질상태 체크 확인
+	    $("#defectForm").on("submit", function (e) {
+	      const statusChecked = $("input[name='status']:checked").length > 0;
+	      if (!statusChecked) {
+	        alert("품질 상태를 최소 한 개 이상 선택해주세요.");
+	        e.preventDefault();
+	      } else {
+	        alert("등록 완료");
+	      }
+	    });
+
+	    // 도서 선택 시 단가 가져오기
+	    function selectBook(bookNo) {
+	      $.ajax({
+	        url: '/selectBook',
+	        type: 'get',
+	        data: { bookNo },
+	        success: function(data) {
+	          $('#price').val(data.price);
+	          $('#totalAmount').val($('#quantity').val() * data.price);
+	        }
+	      });
+	    }
+
+	    $('#bookSelect').change(function() {
+	      selectBook($(this).val());
+	    });
+
+	    $('#quantity').on('input', function() {
+	      $('#totalAmount').val($(this).val() * $('#price').val());
+	    });
+
+	    // 수정 버튼
+	    $("#update").click(() => {
+	      const defectNo = $("input[name='defect']:checked").val();
+	      if (defectNo) location.href = "/updateDefect?defectNo=" + defectNo;
+	      else alert("수정하실 항목을 선택해주세요.");
+	    });
+
+	    // 삭제 버튼
+	    $("#delete").click(() => {
+	      const defectNo = $("input[name='defect']:checked").val();
+	      if (!defectNo) {
+	        alert("삭제하실 항목을 선택해주세요.");
+	        return;
+	      }
+
+	      $.ajax({
+	        url: "/deleteDefect",
+	        type: "post",
+	        data: { defectNo },
+	        success: function () {
+	          alert("삭제되었습니다.");
+	          location.href = "/allDefect";
+	        },
+	        error: function () {
+	          alert("삭제에 실패했습니다.");
+	        }
+	      });
+	    });
+
+        $("#update").click(() => {
+	  			const selectedSalaryNo = $("input[name='salary']:checked").val();
+	  			if(selectedSalaryNo)
+	  			{
+	  				location.href="/updateSalary?SalaryNo=" + selectedSalaryNo;			
+	  			}
+	  			else
+	  			{
+	  				alert("수정할 급여를 선택하세요.");
+	  			}
+	  		});
+	  		$("#delete").click(() => {
+	  			const selectedSalaryNo = $("input[name='salary']:checked").val();
+	  			
+	  			const formData = new FormData();
+	  			formData.append("salaryNo", selectedSalaryNo);
+	  			
+	  			if(selectedSalaryNo)
+	  						{
+	  			$.ajax({
+	  				type : "POST",
+	  				url : "/deleteSalary",
+	  				data : formData,
+	  				processData: false,
+	  				contentType: false,
+	  				success: function (result) {
+	  					if (result === "success") {
+	  						alert("해당정보가 삭제되었습니다.");
+	  						location.href = "/allSalary";
+	  					} else {
+	  						alert("삭제할 수 없습니다.");
+	  						location.href = "/allSalary";
+	  					}	
+	  				},
+	  			})
+	  		}
+	  					else
+	  					{
+	  						alert("삭제할 내용을 선택하세요.");
+	  					}
+	  		})
+	  	
+	  </script>
+
+
+</body>
+</html>

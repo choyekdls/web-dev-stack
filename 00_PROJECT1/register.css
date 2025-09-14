@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: rgba(0, 0, 0, 0.09); /* 로그인 .register-card와 동일 */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* 카드 */
+.registerCard {
+  background: #ffffff;
+  width: 360px;
+  max-width: calc(100% - 32px);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* 로고 중앙 정렬 (기존 margin-left 제거) */
+.registerCard img {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+}
+
+/* 타이틀 */
+.registerCard h1 {
+  margin: 0 0 20px;
+  font-size: 1.6em;
+  text-align: center;
+  color: #333;
+}
+
+/* 컨트롤 공통 크기(높이 통일) */
+:root {
+  --ctl-h: 46px;
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+}
+
+.inputGroup input,
+.inputGroup select {
+  width: 100%;
+  height: var(--ctl-h); /* ⬅️ 높이 통일 */
+  padding: 12px;
+  border: 1px solid #f4f4f4;
+  border-radius: 8px;
+  background-color: #fafafa;
+  font-size: 14px;
+  line-height: 1.2;
+  display: block;
+}
+
+/* 기본 브라우저 스타일 차이 보정 */
+.inputGroup select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.inputGroup input[type="date"] {
+  /* 날짜 인풋 높이 강제 */
+  padding: 0 12px;
+}
+
+/* 보조 문구 */
+.inputGroup p {
+  margin-top: 6px;
+  margin-left: 4px;
+  font-size: 0.8em;
+  color: #706e6e;
+}
+
+/* 버튼도 동일 폭/높이 */
+.register,
+.cancel {
+  width: 100%;
+  height: var(--ctl-h); /* ⬅️ 높이 통일 */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #333;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.register {
+  background: #f4f4f4;
+  margin-top: 6px;
+}
+.register:hover {
+  background: #e8e8e8;
+}
+.register:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel {
+  background: #fafafa;
+  border: 1px solid #f4f4f4;
+  margin-top: 8px;
+}
+.cancel:hover {
+  background: #f2f2f2;
+}
+
+/* 로그인 링크 */
+.to-login {
+  text-align: center;
+  margin-top: 15px;
+}
+.to-login a {
+  font-size: 0.85em;
+  color: #555;
+  text-decoration: none;
+}
+.to-login a:hover {
+  text-decoration: underline;
+}

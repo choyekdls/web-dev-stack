@@ -1,43 +1,64 @@
 :root {
-  --side-width: 250px;
-  --header-height: 60px;
+  --side-width: 380px;
 }
+
+body {
+  background-color: #faf7f0;
+  padding-left: 10px;
+  padding: 15px;
+}
+
 .side {
   position: fixed;
-  background-color: navy;
-  height: 100%;
+  border: #e6cfc5;
+  background-color: #e6cfc5;
   width: var(--side-width);
-  color: white;
+  height: 100%;
+  border-radius: 20px;
   overflow-y: auto;
 }
+
+.logo {
+  margin: 10px auto 20px auto;
+  display: block;
+}
+
 .main {
   padding-left: var(--side-width);
 }
+
 .main header {
-  position: fixed;
-  border-bottom: 1px solid grey;
-  height: var(--header-height);
   width: 100%;
-}
-.main section {
-  padding-top: var(--header-height);
+  height: 90px;
 }
 
-/* 사이드 바 */
+.main section {
+  border: #f0eae2;
+  background-color: #f0eae2;
+  width: 100%;
+  height: 1130px;
+  margin-left: 12px;
+  margin-top: 22px;
+  padding-right: 20px;
+  border-radius: 20px;
+  position: fixed;
+}
+
 .side h1 {
   font-size: 22px;
+  font-weight: bold;
   margin: 20px 16px;
 }
 
 .side h1 a {
-  color: white;
+  color: #2f2f2f;
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
 }
 
 .side h1 a:hover {
-  color: #ccc;
+  color: #c7a9a1;
 }
 /* 메뉴 그룹 전체 간격 */
 .menu-group {
@@ -65,12 +86,16 @@
 .submenu.show {
   display: block;
 }
-
+/*인사 평가 관리 클릭 시 숨김, 펼침*/
+.submenu-2 {
+  display: none; /* 처음엔 숨김 */
+  margin-left: 20px;
+}
 /* 서브메뉴 항목 스타일 */
 .submenu a {
   display: block;
   padding: 6px 12px;
-  color: #ddd;
+  color: #2f2f2f;
   text-decoration: none;
   font-size: 14px;
   border-radius: 4px;
@@ -78,5 +103,61 @@
 }
 .submenu a:hover {
   background-color: rgba(255, 255, 255, 0.15);
-  color: white;
+  color: #2f2f2f;
+}
+
+.greet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  background-color: #fdfaf4;
+}
+
+.status {
+  display: flex;
+  gap: 15px;
+  background-color: #f4f0ea;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  background-color: #b9b4a9;
+  border-radius: 50%;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  background-color: #fdfaf4;
+}
+
+.center-box {
+  text-align: center;
+}
+
+.main-logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+#clock {
+  font-size: 36px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.check-btn {
+  background-color: #b9b4a9;
+  border: none;
+  padding: 15px 50px;
+  font-size: 18px;
+  margin: 10px;
+  border-radius: 30px;
+  cursor: pointer;
 }

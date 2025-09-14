@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>품질 검사 보고서</title>
+  <link rel="stylesheet" href="defect.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<section class="defect">
+  <div class="box">
+    <h1>품질 검사 보고서 검색</h1><br>
+
+    <form action="/allDefect" method="get" class="searchForm">
+      <div class="form-inline">
+        <select name="select">
+          <option value="title">도서명</option>
+          <option value="status">품질 상태</option>
+        </select>
+        <input type="text" name="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요" />
+
+        <div class="btn-wrap">
+          <input type="submit" value="조회" class="btnNavy" />
+          <button type="button" class="btnNavy adminAccess" onclick="openModal()">등록</button>
+        </div>
+      </div>
+    </form>
+
+    <h1>품질 검사 보고서 전체 조회</h1>
+    <div class="tableWrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>선택</th>
+            <th>보고 번호</th>
+            <th>도서명</th>
+            <th>인쇄 날짜</th>
+            <th>품질 상태</th>
+            <th>상세 설명</th>
+            <th>수량</th>
+            <th>단가</th>
+            <th>총 가격</th>
+            <th>등록 날짜</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <c:forEach items="${defectList}" var="defect">
+            <tr>
+              <td><input type="radio" name="defect" value="${defect.defectNo}"></td>
+              <td>${defect.defectNo}</td>
+              <td>${defect.title}</td>
+              <td>${defect.printDate}</td>
+              <td>${defect.status}</td>
+              <td>${defect.content}</td>
+              <td>${defect.quantity}</td>
+              <td>${defect.price}</td>
+              <td>${defect.totalAmount}</td>
+              <td>${defect.defectDate}</td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bottomBtn">
+      <button id="update" type="button" class="update adminAccess">수정</button>
+      <button id="delete" type="button" class="delete adminAccess">삭제</button>
+    </div>
+
+    <nav>
+      <ul class="pagination">
+        <c:choose>
+          <c:when test="${paging.page <= 1}">
+            <li class="disabled"><span>이전</span></li>
+          </c:when>
+          <c:otherwise>
+            <li>
+              <a href="?page=${paging.page - 1}&select=${param.select}&keyword=${param.keyword}">이전</a>
+            </li>
+          </c:otherwise>
+        </c:choose>
+
+        <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+          <li class="${i == paging.page ? 'active' : ''}">
+            <a href="?page=${i}&select=${param.select}&keyword=${param.keyword}">${i}</a>
+          </li>
+        </c:forEach>
+
+        <c:choose>
+          <c:when test="${paging.page >= paging.lastPage}">
+            <li class="disabled"><span>다음</span></li>
+          </c:when>
+          <c:otherwise>
+            <li>
+              <a href="?page=${paging.page + 1}&select=${param.select}&keyword=${param.keyword}">다음</a>
+            </li>
+          </c:otherwise>
+        </c:choose>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<!-- 🟫 모달 영역: 등록 -->
+<div id="defectModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <form action="/newDefect" method="post" id="defectForm">
+  <div class="panel">
+    <div class="panel-heading">
+      <span class="panel-title">품질처리 입력</span>
+      <button type="button" class="collapseBtn" data-target="#createPanel" aria-expanded="true">
+        접기 <span class="chev">▾</span>
+      </button>
+    </div>
+
+    <div id="createPanel" class="panel-body">
+      <div class="formGrid formTable dense-controls">
+        <!-- 1행: 도서/인쇄일자 -->
+        <div class="g-label"><label for="bookSelect">도서명</label></div>
+        <div class="g-field">
+          <select name="bookNo" id="bookSelect" required class="selectLike">
+            <c:forEach var="book" items="${bookList}">
+              <option value="${book.bookNo}" data-price="${book.price}">${book.title}</option>
+            </c:forEach>
+          </select>
+        </div>
+
+        <div class="g-label"><label for="printDate">인쇄 날짜</label></div>
+        <div class="g-field">
+          <input type="date" id="printDate" name="printDate" required />
+        </div>
+
+        <!-- 2행: 품질상태(체크) / 등록일자 -->
+        <div class="g-label">품질 상태</div>
+        <div class="g-field">
+          <div class="status-inline">
+            <label class="cbox"><input type="checkbox" name="statusList" value="인쇄 불량"><span>인쇄 불량</span></label>
+            <label class="cbox"><input type="checkbox" name="statusList" value="오타"><span>오타</span></label>
+            <label class="cbox"><input type="checkbox" name="statusList" value="찢어짐"><span>찢어짐</span></label>
+          </div>
+        </div>
+
+        <div class="g-label"><label for="defectDate">등록 날짜</label></div>
+        <div class="g-field">
+          <input type="date" id="defectDate" name="defectDate" required />
+        </div>
+
+        <!-- 3행: 수량/단가 -->
+        <div class="g-label"><label for="quantity">수량</label></div>
+        <div class="g-field">
+          <input type="number" id="quantity" name="quantity" min="0" required />
+        </div>
+
+        <div class="g-label"><label for="price">단가</label></div>
+        <div class="g-field">
+          <input type="text" id="price" name="price" readonly />
+        </div>
+
+        <!-- 4행: 총가격(읽기전용) / 빈칸 -->
+        <div class="g-label"><label for="totalAmount">총 가격</label></div>
+        <div class="g-field">
+          <input type="number" id="totalAmount" name="totalAmount" readonly />
+        </div>
+        <div class="g-label"></div>
+        <div class="g-field"></div>
+
+        <!-- 5행: 상세설명(두 칸 병합) -->
+        <div class="g-label"><label for="content">상세 설명</label></div>
+        <div class="g-field col-3 col-4">
+          <textarea id="content" name="content" placeholder="내용을 입력하세요" required></textarea>
+        </div>
+
+        <!-- 액션 -->
+        <div class="grid-actions">
+          <button type="submit" id="create" class="btnNavy">등록</button>
+          <button type="button" class="btnGray" onclick="closeModal()">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+  </div>
+</div>
+
+<!-- 🟫 모달 영역: 수정 -->
+<div id="editDefectModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeEditModal()">&times;</span>
+
+    <form id="editDefectForm">
+  <div class="panel">
+    <div class="panel-heading">
+      <span class="panel-title">품질처리 수정</span>
+      <button type="button" class="collapseBtn" data-target="#editPanel" aria-expanded="true">
+        접기 <span class="chev">▾</span>
+      </button>
+    </div>
+
+    <div id="editPanel" class="panel-body">
+      <div class="formGrid formTable dense-controls">
+        <div class="g-label">보고 번호</div>
+        <div class="g-field"><input type="text" id="editDefectNo" name="defectNo" readonly /></div>
+
+        <div class="g-label">도서명</div>
+        <div class="g-field"><input type="text" id="editTitle" name="title" readonly /></div>
+
+        <div class="g-label">인쇄 날짜</div>
+        <div class="g-field"><input type="date" id="editPrintDate" name="printDate" readonly /></div>
+
+        <div class="g-label">품질 상태</div>
+        <div class="g-field">
+          <div class="status-inline" id="editStatusWrap">
+            <label class="cbox"><input type="checkbox" name="statusList" value="인쇄 불량"><span>인쇄 불량</span></label>
+            <label class="cbox"><input type="checkbox" name="statusList" value="오타"><span>오타</span></label>
+            <label class="cbox"><input type="checkbox" name="statusList" value="찢어짐"><span>찢어짐</span></label>
+          </div>
+        </div>
+
+        <div class="g-label"><label for="editDefectContent">상세 설명</label></div>
+        <div class="g-field col-3 col-4"><textarea id="editDefectContent" name="content"></textarea></div>
+
+        <div class="g-label"><label for="editQuantity">수량</label></div>
+        <div class="g-field"><input type="number" id="editQuantity" name="quantity" min="0" /></div>
+
+        <div class="g-label"><label for="editPrice">단가</label></div>
+        <div class="g-field"><input type="number" id="editPrice" name="price" readonly /></div>
+
+        <div class="g-label"><label for="editTotalAmount">총 가격</label></div>
+        <div class="g-field"><input type="number" id="editTotalAmount" name="totalAmount" readonly /></div>
+
+        <div class="g-label"><label for="editDefectDate">등록 날짜</label></div>
+        <div class="g-field"><input type="date" id="editDefectDate" name="defectDate" /></div>
+
+        <div class="grid-actions">
+          <button type="submit" id="acceptEdit" class="btnNavy">수정</button>
+          <button type="button" id="cancelEdit" class="btnGray">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+  </div>
+</div>
+
+<script>
+  // 숫자 안전 변환 & 합계 재계산(등록/수정 공용)
+  function _toNum(v){ return Number(String(v ?? '').replace(/,/g,'')) || 0; }
+
+  // 등록 모달 합계
+  function recalcCreateTotal(){
+    const q = _toNum($('#quantity').val());
+    const p = _toNum($('#price').val());
+    $('#totalAmount').val(q * p);
+  }
+
+  // 수정 모달 합계
+  function recalcEditTotal(){
+    const q = _toNum($('#editQuantity').val());
+    const p = _toNum($('#editPrice').val());
+    $('#editTotalAmount').val(q * p);
+  }
+
+  // 모달 열기/닫기
+  function openModal(){ $("#defectModal").css("display","flex"); }
+  function closeModal(){ $("#defectModal").hide(); }
+
+  function openEditModal(){ $("#editDefectModal").css("display","flex"); }
+  function closeEditModal(){ $("#editDefectModal").hide(); }
+  $("#cancelEdit").on("click", closeEditModal);
+
+  // 등록 시 품질상태 체크 확인
+  $("#defectForm").on("submit", function (e) {
+    const statusChecked = $("#defectForm input[name='statusList']:checked").length > 0;
+    if (!statusChecked) {
+      alert("품질 상태를 최소 한 개 이상 선택해주세요.");
+      e.preventDefault();
+    } else {
+      // 서버에서 최종 검증/저장
+    }
+  });
+
+  // 도서 선택 시 단가 가져오기
+  function selectBook(bookNo) {
+    $.ajax({
+      url: '/selectBook',
+      type: 'get',
+      data: { bookNo },
+      success: function(data) {
+        $('#price').val(data.price);
+        recalcCreateTotal(); // 단가 반영 후 합계 갱신
+      }
+    });
+  }
+
+  // 초기 단가 세팅 + 변경 시 반영
+  $(function() {
+    if ($('#bookSelect').length) {
+      selectBook($('#bookSelect').val());
+      $('#bookSelect').on('change', function() {
+        selectBook($(this).val());
+        recalcCreateTotal();
+      });
+    }
+    $('#quantity').on('input', recalcCreateTotal);
+  });
+
+  // 삭제
+  $("#delete").on("click", function(){
+    const defectNo = $("input[name='defect']:checked").val();
+    if (!defectNo) return alert("삭제하실 항목을 선택해주세요.");
+
+    $.ajax({
+      url: "/deleteDefect",
+      type: "post",
+      data: { defectNo },
+      success: function () {
+        alert("삭제되었습니다.");
+        location.href = "/allDefect";
+      },
+      error: function () {
+        alert("삭제에 실패했습니다.");
+      }
+    });
+  });
+
+  // 수정: 선택 > 상세 조회 > 모달 오픈
+  $("#update").off("click").on("click", function() {
+    const defectNo = $("input[name='defect']:checked").val();
+    if (!defectNo) return alert("수정할 품질 보고를 선택해주세요.");
+
+    $.get("/getDefect", { defectNo })
+      .done(function(d) {
+        $("#editDefectNo").val(d.defectNo);
+        $("#editTitle").val(d.title || "");
+        $("#editPrintDate").val(d.printDate || "");
+
+        // 상태 체크박스 세팅
+        $("#editDefectForm input[name='statusList']").prop("checked", false);
+        if (d.status) {
+          d.status.split(",").forEach(function(v){
+            $("input[name='statusList'][value='" + v.trim() + "']").prop("checked", true);
+          });
+        }
+
+        $("#editDefectContent").val(d.content || "");
+        $("#editQuantity").val(d.quantity ?? 0);
+        $("#editPrice").val(d.price ?? 0);
+        $("#editTotalAmount").val(d.totalAmount ?? 0);
+        $("#editDefectDate").val(d.defectDate || "");
+
+        recalcEditTotal();
+        $('#editQuantity').off('input').on('input', recalcEditTotal);
+
+        openEditModal();
+      })
+      .fail(function() { alert("보고서 정보 상세 조회 실패"); });
+  });
+
+  // 수정 저장
+  $("#editDefectForm").off("submit").on("submit", function(e){
+    e.preventDefault();
+    $.ajax({
+      url: "/updateDefect",
+      type: "POST",
+      data: $(this).serialize(),
+      success: function(res) {
+        if($.trim(res) === "success") { alert("저장되었습니다"); closeEditModal(); location.reload(); }
+        else if($.trim(res) === "fail") { alert("저장 실패"); }
+        else { alert("서버 오류 저장 실패"); }
+      },
+      error: function(){ alert("서버 오류 저장 실패"); }
+    });
+  });
+
+  // 패널 접기/펼치기
+  $(document).on('click', '.collapseBtn', function(){
+    const target = $(this).data('target');
+    const $body = $(target);
+    const expanded = $(this).attr('aria-expanded') === 'true';
+    $(this).attr('aria-expanded', !expanded);
+    $body.slideToggle(120);
+  });
+  
+</script>
+
+</body>
+</html>

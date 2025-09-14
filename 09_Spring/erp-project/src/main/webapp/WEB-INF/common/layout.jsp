@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="../resources/css/layout.css" />
   </head>
   <body>
-	<jsp:include page="side.jsp" />
-	    <div class="main">
-			<jsp:include page="header.jsp" />
-	      <jsp:include page="${component}" />
-		</div>
-		<script src="../resources/js/layout.js"></script>
+    <jsp:include page="side.jsp"/>
+    <div class="main">
+      <jsp:include page="header.jsp"/>
+      <jsp:include page="${component}"/>
+    </div>
+	<script src="${pageContext.request.contextPath}/resources/js/layout.js"></script>
   </body>
 </html>

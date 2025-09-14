@@ -10,11 +10,121 @@
   <body>
     <div class="side">전체 메뉴 조회</div>
     <div class="main">
-      <header>
-        <h1>Welcome, Dain!</h1>
-        <h1></h1>
+      <header class="header">
+        <div class="logo">LOGO</div>
+
+        <nav class="personalBox" aria-label="User quick actions">
+          <button class="iconBtn" aria-label="Files" data-menu="filesMenu">
+            <img src="./assets/file.png" alt="" />
+          </button>
+
+          <div class="menuWrap">
+            <button
+              class="iconBtn"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="userMenu"
+              data-menu="userMenu"
+            >
+              <img src="./assets/user.png" alt="" />
+            </button>
+            <div id="userMenu" class="dropdown" role="menu">
+              <a href="/my" role="menuitem" tabindex="-1">내 정보</a>
+              <a href="/settings" role="menuitem" tabindex="-1">설정</a>
+              <hr />
+              <button
+                type="button"
+                role="menuitem"
+                class="danger"
+                tabindex="-1"
+                onclick="location.href='/logout'"
+              >
+                로그아웃
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="iconBtn"
+            aria-label="Logout"
+            onclick="location.href='/logout'"
+          >
+            <img src="./assets/logout.png" alt="" />
+          </button>
+
+          <!-- 다른 아이콘들도 dropdown이 필요하면 위의 .menuWrap 패턴을 복사해서 사용 -->
+          <div id="filesMenu" class="dropdown" role="menu">
+            <a href="/files/recent" role="menuitem" tabindex="-1">최근 파일</a>
+            <a href="/files/upload" role="menuitem" tabindex="-1">업로드</a>
+          </div>
+          <div id="mailMenu" class="dropdown" role="menu">
+            <a href="/mail/inbox" role="menuitem" tabindex="-1">받은 메일함</a>
+            <a href="/mail/compose" role="menuitem" tabindex="-1">새 메일</a>
+          </div>
+        </nav>
       </header>
+      <main class="main">...</main>
       <section>CONTENT</section>
     </div>
+
+    <script>
+      (function () {
+        const btns = document.querySelectorAll(".iconBtn[data-menu]");
+        const menusById = {};
+
+        function closeAll() {
+          document.querySelectorAll(".dropdown.open").forEach((m) => {
+            m.classList.remove("open");
+            const btn = document.querySelector(`.iconBtn[data-menu="${m.id}"]`);
+            if (btn) btn.setAttribute("aria-expanded", "false");
+          });
+        }
+
+        btns.forEach((btn) => {
+          const id = btn.dataset.menu;
+          const menu = document.getElementById(id);
+          if (!menu) return;
+          menusById[id] = menu;
+          btn.setAttribute("aria-controls", id);
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = menu.classList.contains("open");
+            closeAll();
+            if (!isOpen) {
+              menu.classList.add("open");
+              btn.setAttribute("aria-expanded", "true");
+              // 첫 포커스 가능한 항목으로 포커스 이동
+              const focusable = menu.querySelector('[role="menuitem"]');
+              if (focusable) setTimeout(() => focusable.focus(), 0);
+            }
+          });
+        });
+
+        // 바깥 클릭 시 닫기
+        document.addEventListener("click", (e) => {
+          const isMenuClick =
+            e.target.closest(".dropdown") || e.target.closest(".iconBtn");
+          if (!isMenuClick) closeAll();
+        });
+
+        // ESC로 닫기
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeAll();
+        });
+
+        // 메뉴 내에서 Tab 순환 끝나면 닫기(선택사항)
+        document.querySelectorAll(".dropdown").forEach((menu) => {
+          menu.addEventListener("keydown", (e) => {
+            if (e.key === "Tab" && !e.shiftKey) {
+              const items = [...menu.querySelectorAll('[role="menuitem"]')];
+              const last = items.at(-1);
+              if (document.activeElement === last) {
+                closeAll();
+              }
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

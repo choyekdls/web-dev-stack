@@ -611,3 +611,17 @@ CREATE TABLE CERTIFICATE (
    CERT_ISSUE DATE NOT NULL,
    CERT_EXP DATE NOT NULL
 );*/
+
+CREATE TABLE request (
+  request_no INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  content TEXT NOT NULL,
+  file_path VARCHAR(500),
+  member_no INT NOT NULL,
+  approver_no INT NOT NULL,
+  write_date DATE DEFAULT (CURRENT_DATE),
+  approval_status VARCHAR(20) DEFAULT '대기',
+  FOREIGN KEY (member_no) REFERENCES member(member_no),
+  FOREIGN KEY (approver_no) REFERENCES member(member_no)
+  );
+

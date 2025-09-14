@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <div class="registerCard">
+      <img src="<c:url value='/assets/logo.png'/>" />
+      <h1>REGISTER</h1>
+
+      <div class="inputGroup">
+        <input
+          type="text"
+          name="id"
+          id="id"
+          placeholder="사용하실 아이디를 입력하세요"
+          required
+        />
+      </div>
+
+      <div class="inputGroup">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="이름을 입력하세요"
+          required
+        />
+      </div>
+
+      <div class="inputGroup">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="비밀번호를 입력하세요"
+          required
+        />
+      </div>
+      <!-- <div class="input-group">
+        <input
+          type="password"
+          name="passwordConfirm"
+          placeholder="비밀번호 확인"
+          required
+        />
+      </div> -->
+
+      <div class="inputGroup">
+        <select name="deptNo" id="deptNo">
+          <option value="" disabled selected>
+            본인이 속한 부서를 선택하세요
+          </option>
+          <option value="1">마케팅</option>
+          <option value="2">인사팀</option>
+          <option value="3">회계/재무팀</option>
+          <option value="4">물류(재고 관리)팀</option>
+          <option value="5">영업팀</option>
+        </select>
+      </div>
+
+      <div class="inputGroup">
+        <input
+          type="text"
+          name="email"
+          placeholder="주소를 입력하세요"
+          required
+        />
+      </div>
+
+      <div class="inputGroup">
+        <input
+          type="email"
+          name="email"
+          placeholder="이메일을 입력하세요"
+          required
+        />
+      </div>
+
+      <div class="inputGroup">
+        <input type="date" name="joinDate" placeholder="입사일" required />
+        <p>※ 본인의 입사일을 입력해주세요</p>
+      </div>
+
+      <button type="submit" class="register">회원가입</button>
+      <button type="submit" class="cancel">회원가입</button>
+
+      <div class="to-login">
+        <a href="<c:url value='/login'/>">이미 계정이 있으신가요? 로그인</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="profile.css" />
+  </head>
+  <body>
+    <section class="profileCard">
+      <div class="profileHead">
+        <h1>MY PROFILE</h1>
+        <!--<div class="avatar">
+      <c:choose>
+        <c:when test="${not empty member.profileUrl}">
+          <img src="${pageContext.request.contextPath}${member.profileUrl}" alt="${member.name}의 프로필">
+        </c:when>
+        <c:otherwise>
+          <div class="avatar-fallback">
+            <c:out value="${fn:substring(member.name,0,1)}"/>
+          </div>
+        </c:otherwise>
+      </c:choose>
+    </div> -->
+
+        <div class="title">
+          <h2><c:out value="${member.name}" /></h2>
+          <p class="dept"><c:out value="${member.dept_name}" /></p>
+          <p class="sub"><c:out value="${member.id}" /></p>
+        </div>
+
+        <div class="actions">
+          <form
+            action="${pageContext.request.contextPath}/updateInfo"
+            method="get"
+          >
+            <button class="btn">회원 정보 수정</button>
+          </form>
+        </div>
+      </div>
+
+      <dl class="info">
+        <div class="myInfo">
+          <dt>아이디</dt>
+          <dd><c:out value="${member.id}" /></dd>
+        </div>
+        <div class="myInfo">
+          <dt>이메일</dt>
+          <dd><c:out value="${member.email}" /></dd>
+        </div>
+        <div class="myInfo">
+          <dt>부서</dt>
+          <dd><c:out value="${member.dept_name}" /></dd>
+        </div>
+        <div class="myInfo">
+          <dt>주소</dt>
+          <dd><c:out value="${member.addr}" /></dd>
+        </div>
+        <div class="myInfo">
+          <dt>입사일</dt>
+          <dd><c:out value="${member.joinDate}" /></dd>
+        </div>
+      </dl>
+    </section>
+  </body>
+</html>

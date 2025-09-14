@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="newDefect.css" />
+  </head>
+  <body>
+    <form action="/newDefect" method="post" id="defectForm">
+      <div class="form-section">
+        <h1>품질 검수 보고 등록</h1>
+
+        <div class="row">
+          <label for="bookSelect">도서명</label>
+          <select name="bookNo" id="bookSelect" required>
+            <c:forEach var="book" items="${bookList}">
+              <option value="${book.bookNo}" data-price="${book.price}">
+                ${book.title}
+              </option>
+            </c:forEach>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="printDate">인쇄 날짜</label>
+          <input type="date" id="printDate" name="printDate" required />
+        </div>
+
+        <div class="row">
+          <label>품질 상태</label>
+          <div>
+            <label
+              ><input type="checkbox" name="status" value="인쇄 불량" /> 인쇄
+              불량</label
+            >
+            <label style="margin-left: 14px"
+              ><input type="checkbox" name="status" value="오타" /> 오타</label
+            >
+            <label style="margin-left: 14px"
+              ><input type="checkbox" name="status" value="찢어짐" />
+              찢어짐</label
+            >
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="content">상세 설명</label>
+          <textarea
+            id="content"
+            name="content"
+            cols="70"
+            rows="5"
+            placeholder="내용을 입력하세요"
+            required
+          ></textarea>
+        </div>
+
+        <div class="row">
+          <label for="quantity">수량</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+
+        <div class="row">
+          <label for="price">단가</label>
+          <input type="number" id="price" name="price" readonly />
+        </div>
+
+        <div class="row">
+          <label for="totalAmount">총 가격</label>
+          <input type="number" id="totalAmount" name="totalAmount" readonly />
+        </div>
+
+        <div class="row">
+          <label for="defectDate">등록 날짜</label>
+          <input type="date" id="defectDate" name="defectDate" required />
+        </div>
+
+        <div class="actions">
+          <input type="submit" id="submit" value="등록" />
+        </div>
+      </div>
+    </form>
+
+    <script>
+      function updatePriceFromSelect() {
+        const price = Number(
+          $("#bookSelect option:selected").data("price") || 0
+        );
+        $("#price").val(price);
+        updateTotal();
+      }
+      function updateTotal() {
+        const qty = Number($("#quantity").val() || 0);
+        const price = Number($("#price").val() || 0);
+        $("#totalAmount").val(qty * price);
+      }
+
+      $(function () {
+        updatePriceFromSelect();
+        $("#bookSelect").on("change", updatePriceFromSelect);
+        $("#quantity").on("input", updateTotal);
+      });
+
+      $("#defectForm").on("submit", function (e) {
+        if ($("input[name='status']:checked").length === 0) {
+          alert("품질 상태를 최소 한 개 이상 선택해주세요.");
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>

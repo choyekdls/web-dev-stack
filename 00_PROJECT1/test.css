@@ -1,0 +1,191 @@
+:root {
+  --card: #fff;
+  --ink: #2f2f2f;
+  --line: #eee;
+  --hover: #fafafa;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+}
+
+/* 상단 아이콘 바 */
+.top-icons {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px; /* 아이콘 간 간격 */
+}
+
+/* 아이콘 버튼 – 기존 스타일과 유사 */
+.iconBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+  color: #333;
+}
+.iconBtn:hover {
+  background: var(--hover);
+  transform: translateY(-1px);
+}
+
+/* 프로필 드롭다운 */
+.profile-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* 패널 기본은 숨김 */
+.profile-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 320px;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 14px 12px;
+  display: none;
+  z-index: 1200;
+  animation: fadeSlide 0.18s ease;
+}
+
+/* 마우스를 올리면 보여주기 (접근성: focus-within 포함) */
+.profile-menu:hover .profile-panel,
+.profile-menu:focus-within .profile-panel {
+  display: block;
+}
+
+/* 작은 화살표 */
+.profile-panel__arrow {
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+
+/* 상단 정보 */
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 2px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f1f1f1;
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.meta .name {
+  font-weight: 800;
+}
+.meta .email {
+  font-size: 12px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 상세 정보 */
+.profile-info {
+  padding: 10px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.profile-info dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  row-gap: 6px;
+  column-gap: 6px;
+}
+.profile-info dt {
+  font-size: 13px;
+  color: #666;
+}
+.profile-info dd {
+  margin: 0;
+  font-size: 13px;
+}
+
+.leave {
+  margin-top: 6px;
+  padding: 10px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.leave-label {
+  font-size: 13px;
+  color: #666;
+}
+.leave-count strong {
+  font-size: 18px;
+}
+
+/* 하단 버튼 */
+.profile-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+.profile-actions .btnNavy,
+.profile-actions .btnGray {
+  height: 38px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.profile-actions .btnNavy {
+  background: #2c3e50;
+  color: #fff;
+}
+.profile-actions .btnNavy:hover {
+  background: #1c2a3a;
+}
+.profile-actions .btnGray {
+  background: #f6f7f9;
+  color: #1c2a3a;
+}
+.profile-actions .btnGray:hover {
+  filter: brightness(0.97);
+}
+
+/* 진입 애니메이션 */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="layout.css" />
+  </head>
+  <body>
+    <div class="side">
+      <h1><a href="/main">ERP</a></h1>
+      <nav>
+        <div class="menu-group">
+          <div class="menu-title">인적자원 관리</div>
+          <div class="submenu">
+            <a href="/allMember">직원 정보 조회</a>
+            <a href="/insertSalary">급여 등록</a>
+            <a href="/attendance">출/퇴근 관리</a>
+            <a href="/vacation">휴가 신청</a>
+            <a href="/allVacation">휴가 신청 관리</a>
+            <a href="/vacationCalendarPage">직원 휴가 달력</a>
+            <a href="/overtime">야근 신청</a>
+            <div class="submenu-item">
+              <a href="#" class="toggle-submenu">인사 평가 관리</a>
+              <div class="submenu1">
+                <a href="/newEvaluation">ㆍ인사 평가 등록</a>
+                <a href="/promoCandi">ㆍ진급 대상자 조회</a>
+              </div>
+            </div>
+            <a href="/allQuit">퇴사 관리</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">도서 관리</div>
+          <div class="submenu">
+            <a href="/allBook">도서 목록 조회</a>
+            <a href="/calendarPage">캘린더 실험중</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">작가 계약 관리</div>
+          <div class="submenu">
+            <a href="/newContract">신규 계약 등록</a>
+            <a href="/allContract">계약 작가 조회/수정</a>
+            <a href="/expiredList">만료/해지 계약 조회</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">재고 관리</div>
+          <div class="submenu">
+            <a href="/allInven">재고 현황 조회</a>
+            <a href="/newOutInven">출고 등록</a>
+            <a href="/allShipment">출고 현황 조회</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">구매/판매 관리</div>
+          <div class="submenu">
+            <a href="/newPrintOrder">신규 도서 발주서 등록</a>
+            <a href="/allPrintOrder">발주서 조회/수정</a>
+            <a href="/delivery">출고 일정</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">거래처 관리</div>
+          <div class="submenu">
+            <a href="/newPartner">신규 거래처 등록</a>
+            <a href="/allPartner">거래처 조회/수정</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">운송사 관리</div>
+          <div class="submenu">
+            <a href="/newDelivery">신규 운송사 등록</a>
+            <a href="/allDelivery">운송사 정보 조회/수정</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">마케팅 관리</div>
+          <div class="submenu">
+            <a href="/newMarketing">신규 프로젝트 등록</a>
+            <a href="/allMarketing">프로젝트 조회/수정</a>
+            <a href="#">완료 프로모션 조회</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <div class="menu-title">재무 관리</div>
+          <div class="submenu">
+            <a href="/insertPayroll">급여 지급</a>
+            <a href="/revenue">수입 내역</a>
+            <a href="/expense">지출 내역</a>
+            <div class="submenu-item">
+              <a href="#" class="toggle-submenu">세무 관리</a>
+              <div class="submenu1">
+                <a href="/insertTaxPayment">ㆍ세금 납부 등록</a>
+                <a href="/taxPaidList">ㆍ납부 된 세금 조회</a>
+              </div>
+            </div>
+            <div class="submenu-item">
+              <a href="#" class="toggle-submenu">예산 관리</a>
+              <div class="submenu1">
+                <a href="/insertBudgetPlan">ㆍ부서별 예산 등록</a>
+                <a href="/allBudgetPlan">ㆍ부서별 예산 현황</a>
+                <a href="/insertBudgetExecution">ㆍ부서별 예산 집행</a>
+              </div>
+            </div>
+          </div>
+          <!-- submenu 닫힘 -->
+        </div>
+        <!-- menu-group 닫힘 -->
+
+        <div class="menu-group">
+          <div class="menu-title">품질보증 관리</div>
+          <div class="submenu">
+            <a href="/newDefect">품질 검수 보고 등록</a>
+            <a href="/allDefect">품질 검수 기록 조회</a>
+            <a href="/newClaim">클레임 등록</a>
+            <a href="/allClaim">클레임 조회</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <header class="greet">
+      <div class="welcome-box">
+        <c:choose>
+          <c:when test="${sessionScope.member != null}">
+            <h2>Welcome, ${sessionScope.member.name} :)</h2>
+          </c:when>
+          <c:otherwise>
+            <h2>Welcome, Guest :)</h2>
+          </c:otherwise>
+        </c:choose>
+        <p><span id="time"></span> (<span id="date"></span>)</p>
+        <p>출근 시간: <span id="checkInDisplay"></span></p>
+        <p>퇴근 시간: <span id="checkOutDisplay"></span></p>
+      </div>
+
+      <nav class="personalBox">
+        <!-- 품의서 -->
+        <form action="/allRequest" method="get">
+          <button class="iconBtn" id="request" name="requestMenu">
+            <img
+              src="${pageContext.request.contextPath}/resources/assets/file.png"
+              alt="품의서"
+              width="20px"
+            />
+          </button>
+        </form>
+
+        <!-- 개인정보 -->
+        <form action="/myPage" method="get">
+          <button
+            class="iconBtn"
+            id="personal"
+            name="personalMenu"
+            data-href="${pageContext.request.contextPath}/myPage/updateInfo"
+          >
+            <img
+              src="${pageContext.request.contextPath}/resources/assets/user.png"
+              alt="개인정보"
+              width="20px"
+            />
+          </button>
+        </form>
+
+        <!-- 로그아웃 -->
+        <form action="/logout" method="get">
+          <button
+            class="iconBtn"
+            id="logout"
+            name="logoutMenu"
+            data-href="${pageContext.request.contextPath}/logout"
+          >
+            <img
+              src="${pageContext.request.contextPath}/resources/assets/logout.png"
+              alt="로그아웃"
+              width="20px"
+            />
+          </button>
+        </form>
+      </nav>
+    </header>
+
+    <script>
+      $(document).ready(function () {
+        let memberNo;
+        let memberList = []; //
+
+        // 메뉴 토글
+        $(".menu-title").click(function () {
+          $(this).next(".submenu").toggleClass("show");
+        });
+
+        // 2차 서브메뉴 (인사 평가 관리)
+        $(".toggle-submenu").click(function () {
+          $(this).next(".submenu1").toggleClass("show");
+        });
+
+        $.ajax({
+          url: "/getMemberNo",
+          type: "GET",
+          success: function (getNo) {
+            memberNo = getNo;
+            getDate(memberNo);
+          },
+          error: function () {
+            console.error("🚫 사원 번호 요청 실패");
+          },
+        });
+
+        function getDate(memberNo) {
+          // 브라우저 로드 시 서버에서 오늘 날짜 받아오기
+          $.ajax({
+            url: "/getOverTime",
+            type: "GET",
+            success: function (overTimeList) {
+              memberList = overTimeList;
+              //날짜 받기
+              const now = new Date(); //현재 시간
+              const resetHour = 5;
+              const todayReset = new Date();
+              todayReset.setHours(resetHour, 0, 0, 0); //오늘 오전 5시
+              const lastReset = localStorage.getItem("lastReset");
+
+              $("#time").text(now.toISOString().split("T")[0]);
+              const dayNames = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ];
+              const dayOfWeek = dayNames[now.getDay()];
+              console.log(dayOfWeek); // 👉 오늘 요일 출력 (예: "수요일")
+              $("#date").text(dayOfWeek);
+
+              // 날짜가 다르면 localStorage 초기화
+              if (
+                !lastReset ||
+                (now >= todayReset && new Date(lastReset) < todayReset)
+              ) {
+                localStorage.setItem(`${memberNo}` + "_checkedIn", "false");
+                localStorage.setItem(`${memberNo}` + "_checkedOut", "false");
+                localStorage.removeItem(`${memberNo}` + "_checkInTime");
+                localStorage.removeItem(`${memberNo}` + "_checkOutTime");
+                //초기화 날짜 저장
+                localStorage.setItem("lastReset", now.toISOString());
+              }
+
+              if (
+                localStorage.getItem(`${memberNo}` + "_checkedIn") === "true"
+              ) {
+                $("#checkIn").prop("disabled", true).text("출근 완료");
+              }
+              //출근 시간
+              const checkInTime = localStorage.getItem(
+                `${memberNo}` + "_checkInTime"
+              );
+              if (checkInTime) {
+                $("#checkInDisplay").text(checkInTime);
+              }
+              //퇴근 시간
+              const checkOutTime = localStorage.getItem(
+                `${memberNo}` + "_checkOutTime"
+              );
+              if (checkOutTime) {
+                $("#checkOutDisplay").text(checkOutTime);
+              }
+            },
+            error: function () {
+              console.error("🚫 서버 날짜 요청 실패");
+            },
+          });
+        }
+
+        $("#checkIn").click(function () {
+          if (!memberNo) return alert("사원 번호가 아직 로드되지 않았습니다.");
+          //오늘 날짜와 Controller날짜와 비교
+          localStorage.setItem(`${memberNo}` + "_checkedIn", "true");
+
+          //찍은 시간 저장
+          const now = new Date();
+          const timeString = now.toTimeString().split(" ")[0]; // "HH:mm:ss"
+          localStorage.setItem(`${memberNo}` + "_checkInTime", timeString);
+          $("#checkInDisplay").text(timeString);
+          $.ajax({
+            url: "/checkIn",
+            type: "POST",
+            success: function (result) {
+              if (parseInt(result) > 0) {
+                alert("출근 체크 완료");
+                location.href = "/main";
+              } else if (parseInt(result) == -1) {
+                alert("이미 출근하였습니다.");
+              }
+            },
+            error: function () {
+              alert("출근 체크 실패");
+            },
+          });
+        });
+
+        $("#checkOut").click(function () {
+          if (!memberNo) return alert("사원 번호가 아직 로드되지 않았습니다.");
+          if (localStorage.getItem(`${memberNo}` + "_checkedIn") === "false") {
+            alert("아직 출근하지 않았습니다.");
+            return;
+          }
+
+          //12시부터 5시까지
+          const now = new Date();
+          const hour = now.getHours(); //시간 ex: 17
+          // memberNo가 야근 신청 리스트에 없는 경우 반환
+          if (!memberList.includes(memberNo) && hour >= 0 && hour < 5) {
+            alert("야근 신청을 하지 않았습니다.");
+            return;
+          }
+
+          const timeString = now.toTimeString().split(" ")[0]; // "HH:mm:ss"
+          localStorage.setItem(`${memberNo}` + "_checkOutTime", timeString);
+          $("#checkOutDisplay").text(timeString);
+          $.ajax({
+            url: "/checkOut",
+            type: "POST",
+            success: function (result) {
+              if (parseInt(result) > 0) {
+                alert("퇴근 체크 완료");
+              } else if (parseInt(result) == -1) {
+                alert("출근 상태가 아닙니다.");
+              }
+            },
+            error: function () {
+              alert("퇴근 체크 실패");
+            },
+          });
+        });
+        $("#request").click(() => {
+          location.href = "/allRequest";
+        });
+      });
+    </script>
+  </body>
+</html>

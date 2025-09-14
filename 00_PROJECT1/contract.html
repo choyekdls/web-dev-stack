@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계약작가 정보 조회</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/contract.css" />
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+	
+	<section class="contract">
+		<div class="contractBox">
+			
+    <h1>계약 작가 정보 검색</h1><br>
+	
+		<form class="contract-search-form" action="/allContract" method="get">
+			<div class="form-inline">
+			<input type="text" name="keyword" value="${param.keyword}" placeholder="작가명 또는 계약번호을 입력하세요.">
+			<div class="btn-wrap">
+			<input type="submit" value="조회" class="btnNavy">
+			<button id="createBtn" type="button" class="btnNavy adminAccess">계약 등록</button>
+			</div>
+			</div>
+		</form>
+		
+	<h1>전체 계약 작가 정보 조회</h1>
+	<div class="tableWrapper">
+	<table class="contractTable">
+		<thead>
+		<tr>
+			<th>선택</th>
+			<th>작가명</th>
+			<th>국적</th>
+			<th>생년월일</th>
+			<th>성별</th>
+			<th>도서명</th>
+			<th>장르</th>
+			<th>계약금</th>
+			<th>인세</th>
+			<th>계약 일자</th>
+			<th>계약 만료 일자</th>
+			<th>원고 마감 일자</th>
+			<th>인쇄 일자</th>
+			<th>출판 일자</th>
+		</tr>
+		</thead>
+		<tbody>
+		<c:forEach items="${list}" var="contract">	
+		<tr>
+			<td><input type="radio" name="contractNo" value="${contract.contractNo}"></td>
+			<td>${contract.authorName}</td>
+			<td>${contract.nationality}</td>
+			<td>${contract.birthDate}</td>
+			<td>${contract.gender}</td>
+			<td>${contract.bookTitle}</td>
+			<td>${contract.genre}</td>
+			<td>${contract.contractAmount}</td>
+			<td>${contract.royaltyRate}</td>
+			<td>${contract.startDate}</td>
+			<td>${contract.endDate}</td>
+			<td>${contract.manuscriptDue}</td>
+			<td>${contract.printDate}</td>
+			<td>${contract.publishDate}</td>
+		</tr>
+		</c:forEach>
+		</tbody>
+		</table>
+		</div>
+		</div>
+		
+		<div class="btn-wrap">
+		<button id="updateBtn" type="button" class="btnNavy adminAccess">수정</button>
+	    <button id="deleteBtn" type="button" class="btnNavy adminAccess">삭제</button>
+		</div>
+		
+		<nav>
+			  <ul class="pagination">
+			  
+			    <!-- 이전 버튼 -->
+			    <c:choose>
+			      <c:when test="${paging.page == 1}">
+			        <li class="disabled"><span>이전</span></li>
+			      </c:when>
+			      <c:otherwise>
+			        <li><a href="?page=${paging.page - 1}&select=${paging.select}&keyword=${paging.keyword}">이전</a></li>
+			      </c:otherwise>
+			    </c:choose>
+
+			    <!-- 페이지 번호 -->
+				<c:if test="${paging.startPage > 0 && paging.endPage > 0}">
+				  <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+				    <li class="${i == paging.page ? 'active' : ''}">
+				      <a href="?page=${i}&select=${paging.select}&keyword=${paging.keyword}">${i}</a>
+				    </li>
+				  </c:forEach>
+				</c:if>
+
+			    <!-- 다음 버튼 -->
+			    <c:choose>
+			      <c:when test="${paging.page == paging.endPage}">
+			        <li class="disabled"><span>다음</span></li>
+			      </c:when>
+			      <c:otherwise>
+			        <li><a href="?page=${paging.page + 1}&select=${paging.select}&keyword=${paging.keyword}">다음</a></li>
+			      </c:otherwise>
+			    </c:choose>
+
+			  </ul>
+			</nav>
+		
+	
+		</section>
+		
+		<!--계약 등록 모달-->
+		<div id="contractModal" class="modal" style="display:none;">
+		  <div class="modal-content">
+			<span class="close">&times;</span>
+			
+			<form action="/newContract" method="post" id="contractForm">
+		    <h1>계약 등록</h1>
+			
+		    <div class="input">
+				<label class="label" for="authorName">작가명</label>
+				<input type="text" id="authorName" name="authorName" required>
+			</div>
+					
+			<div class="input">   
+				<label class="label" for="birthDate">생년월일</label>
+				<input type="date" name="birthDate" id="birthDate" required>
+			</div>
+				
+			<div class="input">  	   
+			<label class="label" for="nationality" style="display: block;">국적</label> 
+			<select id = "nationality" name="nationality" required>
+		    <option value="" disabled selected>국적 선택</option>
+			<option>그리스</option>
+			<option>네덜란드</option>
+			<option>노르웨이</option>
+			<option>대만</option>
+			<option>대한민국</option>
+			<option>덴마크</option>
+			<option>독일</option>
+			<option>멕시코</option>
+			<option>미국</option>
+			<option>바누아투</option>
+			<option>스웨덴</option>
+			<option>스페인</option>
+			<option>영국</option>
+			<option>오스트레일리아</option>
+			<option>오스트리아</option>
+			<option>인도</option>
+			<option>일본</option>
+			<option>포르투갈</option>
+			<option>프랑스</option>
+			</select>
+			</div>	
+								
+			<div class="gender-group">
+			  <span class="label">성별</span>
+			  <label><input type="radio" name="gender" value="남" checked> 남</label>
+			  <label><input type="radio" name="gender" value="여"> 여</label>
+			</div>
+					  
+			<div class="input">
+            <label class="label">도서명</label>
+			<input type="text" id="bookTitle" name="bookTitle" required>
+			</div>
+			
+			<div class="input">
+			<label class="label" for="genre" style="display: block;">장르</label>
+		    <select id="genre" name="genre" required>
+			<option value="" disabled selected>장르 선택</option>
+			<option>소설</option>
+			<option>시</option>
+			<option>전기</option>
+			<option>에세이</option>
+			<option>만화</option>
+			<option>심리학</option>
+			<option>논픽션</option>
+			<option>기타</option>
+			</select>
+			</div>	
+			
+			<div class="input">		   			       
+			<label>판매가(원)</label>
+			<input type="number" id="price" name="price" min="0" step="1">
+			</div>
+			
+			<div class="input">	
+			<label>계약금(원)</label>
+			<input type="number" id="contractAmount" name="contractAmount" min="0" step="1" required>
+			</div>
+			
+			<div class="input">	
+			<label>인세율(%)</label>
+			<input type="number" id="royaltyRate" name="royaltyRate" min="0" step="0.1" required>
+			</div>
+					   
+			<div class="input">	
+			<label>계약 시작일</label>
+			<input type="date" id="startDate" name="startDate" required>
+			</div>
+					   
+			<div class="input">	
+			<label>계약 종료일</label>
+			<input type="date" id="endDate" name="endDate">
+			</div>
+
+			<div class="input">	
+			<label>원고 마감일</label>
+			<input type="date" id="manuscriptDue" name="manuscriptDue">
+			</div>
+					   
+			<div class="input">	
+			<label>인쇄 예정일</label>
+			<input type="date" id="printDate" name="printDate">
+			</div>
+					   
+			<div class="input">	
+			<label>출간일</label>
+			<input type="date" id="publishDate" name="publishDate" /><br>
+			</div>
+			
+			<div class="submit">
+			<button type="button"  id="saveCreate">등록</button>
+			<button type="button" id="closeCreate">취소</button>
+			</div>
+			</form>
+			</div>
+			</div>
+			
+		<!-- 계약 해지/ 만료 모달-->
+		<div id="terminateModal" class="modal" style="display:none;">
+		  <div class="modal-content">
+		    <h4>계약 해지/만료 처리</h4>
+
+			<div class="input">
+		    <label class="label" for="terminationType" style="display: block;">처리 유형</label>
+		    <select id="terminationType" name="terminationType">
+		      <option value="">선택</option>
+		      <option value="EXPIRE">만료</option>
+		      <option value="CANCEL">해지</option>
+		    </select>
+			</div>
+
+			<div class="input">
+		    <label class="terminationReason">사유 (최대 200자)</label>
+		    <textarea id="terminationReason" maxlength="200" placeholder="사유를 입력하세요"></textarea>
+			</div>
+
+		    <div class="submit">
+				<button type="button" id="saveTerminate" class="btn btnPrimary">확인</button>
+				<button type="button" id="closeTerminate" class="cancelBtn">취소</button>		
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- 계약 수정 모달 -->
+		<div id="editContractModal" class="modal" style="display:none;">
+		  <div class="modal-content">
+		    <span class="close" id="closeEditModal">&times;</span>
+		    <h1>계약 정보 수정</h1><br>
+
+			<form id="editContractForm">
+			  <input type="hidden" name="contractNo" id="edit-contractNo">
+
+			  <div class="inputGroup">
+			    <label>작가 이름</label>
+			    <input type="text" id="edit-authorName" readonly>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>도서명</label>
+			    <input type="text" id="edit-bookTitle" name="bookTitle" required>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>계약금</label>
+			    <input type="number" id="edit-contractAmount" name="contractAmount" required>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>인세</label>
+			    <input type="number" id="edit-royaltyRate" name="royaltyRate" step="0.1" required>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>계약 만료 일자</label>
+			    <input type="date" id="edit-endDate" name="endDate" required>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>원고 마감 일자</label>
+			    <input type="date" id="edit-manuscriptDue" name="manuscriptDue" required>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>인쇄 일자</label>
+			    <input type="date" id="edit-printDate" name="printDate" required>
+			  </div>
+
+			  <div class="inputGroup">
+			    <label>출판 일자</label>
+			    <input type="date" id="edit-publishDate" name="publishDate" required>
+			  </div>
+
+			  <div class="btnArea">
+			    <button type="submit" class="btnNavy" id="acceptEdit">수정</button>
+			    <button type="button" class="btnGray" id="cancelEdit">취소</button>
+			  </div>
+			</form>
+			
+			  </div>
+			</div>
+		
+		<script>
+
+			// 계약 해지 모달
+			$(function () {
+			       function openTerminateModal() { $("#terminateModal").fadeIn(120); }
+			       function closeTerminateModal() { $("#terminateModal").fadeOut(120); }
+            });
+				   
+            // 계약 등록 모달
+			$(function(){
+			  const openCreateModal = () => $("#contractModal").fadeIn(120);
+			  const closeCreateModal = () => $("#contractModal").fadeOut(120);
+
+			  $("#createBtn").on("click", function(){
+			    $("#contractForm")[0].reset();
+			    openCreateModal();
+			  });
+			  $("#closeCreate").on("click", closeCreateModal);
+			  $("#contractModal .close").on("click", closeCreateModal);
+			});
+
+			       // 등록 저장
+			     $("#saveCreate").on("click", function(e){
+					console.log($("#contractForm").serialize());
+					e.preventDefault();
+					const form = $("#contractForm")[0];
+
+					if (!form.checkValidity()) {
+					    form.reportValidity(); // 브라우저 기본 required 메시지 표시
+					    return;
+					}
+					
+
+			         const authorName = $("#authorName").val()?.trim();
+					 const birthDate = $("#birthDate").val()?.trim();
+					 const gender = $("input[name='gender']:checked").val();
+					 const nationality = $("#nationality").val().trim();
+			         const bookTitle = $("#bookTitle").val()?.trim();
+					 const genre = $("#genre").val().trim();
+			         const contractAmount = $("#contractAmount").val()?.trim();
+			         const royaltyRate = $("#royaltyRate").val()?.trim();
+					 const price = $("#price").val();
+			         const startDate = $("#startDate").val()?.trim();
+			         const endDate = $("#endDate").val()?.trim();
+			         const manuscriptDue = $("#manuscriptDue").val()?.trim();
+			         const printDate = $("#printDate").val()?.trim();
+			         const publishDate = $("#publishDate").val()?.trim();
+					
+			         if (!authorName) return alert('작가명을 입력하세요');
+			         if (!bookTitle) return alert('도서명을 입력하세요');
+			         if (!contractAmount) return alert('계약금을 입력하세요');
+			         if (!royaltyRate) return alert('인세율을 입력하세요');
+			         if (!startDate) return alert('계약 시작일을 입력하세요');
+
+			         if (startDate && endDate && startDate > endDate)
+			           return alert("계약 시작일은 계약 만료일보다 이전이어야 합니다.");
+			         if (manuscriptDue && endDate && manuscriptDue > endDate)
+			           return alert("원고 마감일은 계약 만료일보다 이전이어야 합니다.");
+			         if (manuscriptDue && printDate && manuscriptDue > printDate)
+			           return alert("원고 마감일은 인쇄일보다 이전이어야 합니다.");
+			         if (printDate && publishDate && publishDate < printDate)
+			           return alert("출판일은 인쇄일 이후여야 합니다.");
+
+			         $.ajax({
+			           type: 'POST',
+			           url: '/newContract',
+			           data: $("#contractForm").serialize(),
+			           success: function(res){
+			             if(res === 'success'){
+			               alert('계약 등록 완료');
+			               location.href = '/allContract';
+			             } else {
+			               alert(res || '등록 실패');
+			             }
+			           },
+			           error: function(){ alert('요청 실패'); },
+			           complete: function() { closeCreateModal(); }
+			         });
+			       });
+
+			       // 삭제(해지/만료)
+			       $("#deleteBtn").on("click", function(){
+			         const contractNo = $("input[name='contractNo']:checked").val();
+			         if (!contractNo) return alert("대상 계약을 선택하세요");
+			         openTerminateModal();
+			       });
+			       $("#closeTerminate").on("click", closeTerminateModal);
+
+			       $("#saveTerminate").on("click", function(){
+			         const contractNo  = $("input[name='contractNo']:checked").val();
+			         const closeType   = $('#terminationType').val();
+			         const closeReason = $('#terminationReason').val().trim();
+
+			         if (!contractNo)  return alert('대상 선택');
+			         if (!closeType)   return alert('유형 선택');
+			         if (!closeReason) return alert('사유 입력');
+
+			         $.ajax({
+			           type: "POST",
+			           url: "/insertExpired",
+			           data: { contractNo, closeType, closeReason },
+			           success: function (result) {
+			             if (result === "success") {
+			               alert("처리 완료");
+			               location.href = "/allContract";
+			             } else {
+			               alert("처리 실패");
+			             }
+			           },
+			           error: function () { alert("요청 실패"); },
+			         });
+			       });			      
+				 
+				 // 계약 수정 모달 script
+				 $(function(){
+				   const openEditModal  = () => $("#editContractModal").css("display","flex");
+				   const closeEditModal = () => $("#editContractModal").hide();
+
+				   $("#closeEditModal, #cancelEdit").on("click", closeEditModal);
+
+				   // 수정 버튼: 선택된 행으로 상세 조회 후 모달 open
+				   $("#updateBtn").off("click").on("click", function(){
+				     const contractNo = $("input[name='contractNo']:checked").val();
+				     if(!contractNo){ alert("수정할 계약을 선택하세요."); return; }
+
+				     $.get("/getContract", { contractNo })
+				      .done(function(contract){
+				        $("#edit-contractNo").val(contract.contractNo);
+				        $("#edit-authorName").val(contract.authorName);
+				        $("#edit-bookTitle").val(contract.bookTitle);
+				        $("#edit-contractAmount").val(contract.contractAmount);
+				        $("#edit-royaltyRate").val(contract.royaltyRate);
+				        $("#edit-endDate").val(contract.endDate);
+				        $("#edit-manuscriptDue").val(contract.manuscriptDue);
+				        $("#edit-printDate").val(contract.printDate);
+				        $("#edit-publishDate").val(contract.publishDate);
+				        $("#editContractModal").css("display","flex");
+				      })
+				      .fail(()=> alert("계약 상세 조회 실패"));
+				   });
+
+				   // 수정 저장: form submit 로직으로 e.preventDefault() 확실히
+				   $("#editContractForm").on("submit", function(e){
+				     e.preventDefault();
+
+				     // 값 읽기(모두 edit-에서 가져오기)
+				     const data = {
+				       contractNo    : $("#edit-contractNo").val(),
+				       bookTitle     : $("#edit-bookTitle").val(),
+				       contractAmount: $("#edit-contractAmount").val(),
+				       royaltyRate   : $("#edit-royaltyRate").val(),
+				       endDate       : $("#edit-endDate").val(),
+				       manuscriptDue : $("#edit-manuscriptDue").val(),
+				       printDate     : $("#edit-printDate").val(),
+				       publishDate   : $("#edit-publishDate").val()
+				     };
+
+				     // 날짜 검증
+				     if (data.manuscriptDue && data.endDate && data.manuscriptDue > data.endDate)
+				       return alert("원고 마감일은 계약 만료일보다 늦을 수 없습니다.");
+				     if (data.manuscriptDue && data.printDate && data.manuscriptDue > data.printDate)
+				       return alert("원고 마감일은 인쇄일보다 늦을 수 없습니다.");
+				     if (data.publishDate && data.printDate && data.publishDate < data.printDate)
+				       return alert("출판일은 인쇄일보다 이전일 수 없습니다.");
+
+				     $.ajax({
+				       url: "/updateContract",
+				       type: "POST",
+				       contentType: "application/json",
+				       data: JSON.stringify(data),
+				       success: function (res) {
+				         if (res === "success"){ alert("수정 완료"); closeEditModal(); location.reload(); }
+				         else { alert("수정 실패"); }
+				       },
+				       error: function(){ alert("수정 중 오류가 발생했습니다."); }
+				     });
+				   });
+				 });
+			
+		</script>	
+  </body>
+</html>

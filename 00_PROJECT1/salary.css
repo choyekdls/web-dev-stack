@@ -1,0 +1,246 @@
+body {
+  background-color: #1c2a3a;
+}
+/* 전체 컨테이너 (흰 배경 상자) */
+.salaryBox {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* 검색 영역 */
+.salary-search-form {
+  width: 100%;
+  max-width: 1024px;
+  margin-bottom: 20px;
+}
+
+.salary-search-form .form-inline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* select 크기 축소 */
+.salary-search-form select {
+  width: 160px;
+  height: 40px;
+}
+
+/* input 너비 확장 */
+.salary-search-form input[type="text"] {
+  flex: 1;
+  min-width: 300px;
+  height: 42px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.salary-search-form input[type="submit"] {
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.salary-search-form button[type="button"] {
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.btnNavy:hover {
+  background-color: #1c2a3a;
+}
+
+/* 테이블 감싸는 영역 (가로 스크롤 대비용) */
+.tableWrapper {
+  overflow-x: auto;
+}
+
+/* 테이블 */
+.salaryTable {
+  width: 100%;
+  min-width: 800px; /* 표가 너무 작아지지 않도록 최소 너비 설정 */
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.salaryTable th,
+.salaryTable td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+  /*글자 수에 맞춰서 표 크기 자동으로 넓히기(글자가 안 잘림)*/
+  white-space: nowrap;
+}
+
+.salaryTable th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.salaryTable tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.salaryTable tr:hover {
+  background-color: #f1f7ff;
+}
+
+.bottomBtn .update,
+.bottomBtn .delete {
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+/* ==================== 모달 배경 ==================== */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+/* ==================== 모달 창 ==================== */
+.modal-content {
+  width: 540px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  padding: 40px 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #4b2e2e;
+}
+
+/* ==================== 닫기 버튼 ==================== */
+.close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
+.close:hover {
+  color: #000;
+}
+
+/* ==================== 공통 인풋 스타일 ==================== */
+.input,
+.status {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: bold;
+  color: #5c3a2f;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: inherit;
+  background: #fff;
+}
+
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+/* ==================== 체크박스 정렬 ==================== */
+.status .label {
+  margin-bottom: 10px;
+}
+
+.status input[type="checkbox"] {
+  margin-right: 6px;
+  margin-left: 12px;
+}
+.status input[type="checkbox"]:first-child {
+  margin-left: 0;
+}
+
+/* ==================== 버튼 ==================== */
+.submit {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+#submit,
+.cancel-btn {
+  background: #6b4f3b;
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#submit:hover,
+.cancel-btn:hover {
+  background: #523d2d;
+}
+
+.cancel-btn {
+  background: #b0a397;
+}
+.cancel-btn:hover {
+  background: #998f87;
+}

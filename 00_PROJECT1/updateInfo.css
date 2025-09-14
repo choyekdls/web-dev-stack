@@ -1,0 +1,125 @@
+:root {
+  --bg: #f1f7ff;
+  --card: #ffffff;
+  --muted: #fafafa;
+  --line: #f4f4f4;
+  --ink: #333;
+  --ctl-h: 46px;
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+  color: var(--ink);
+}
+
+/* 컨테이너 */
+.updateCard {
+  width: min(640px, 92%);
+  margin: 40px auto;
+  padding: 32px 28px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 제목 */
+.updateCard h1 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--ink);
+}
+
+/* 라벨+컨트롤 */
+.inputGroup {
+  margin-bottom: 12px;
+}
+.inputGroup label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: #555;
+}
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
+  width: 100%;
+  height: var(--ctl-h);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--muted);
+  font-size: 14px;
+  line-height: 1.2;
+  outline: none;
+  transition: border 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.inputGroup textarea {
+  height: 120px;
+  resize: vertical;
+}
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
+  background: #fff;
+  border-color: #d8e2ff;
+  box-shadow: 0 0 0 3px rgba(216, 226, 255, 0.4);
+}
+
+/* 비활성 select */
+.inputGroup select:disabled {
+  background: #f2f2f2;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+.btn {
+  min-width: 120px;
+  height: var(--ctl-h);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #333;
+  background: var(--line);
+  transition: filter 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+.btn:hover {
+  background: #e8e8e8;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 보조 버튼(취소) - 아웃라인 스타일 */
+.btn-outline {
+  background: var(--muted);
+  border: 1px solid var(--line);
+}
+.btn-outline:hover {
+  background: #f2f2f2;
+}

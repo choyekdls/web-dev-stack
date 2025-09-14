@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+.personalBox:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.personalBox > li {
+  position: relative;
+  float: left;
+  margin-right: 5px;
+}
+.personalBox > li > a {
+  display: block;
+  padding: 0 15px;
+  background: #333;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+}
+
+.personalBox > li > img {
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.personalBox > li:hover .depth_1 {
+  display: block;
+}
+.personalBox .depth_1 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0; /* 필요하면 50% + translateX(-50%)로 중앙정렬 */
+  min-width: 160px; /* 최소 폭 보장 */
+  width: max-content; /* 내용에 맞춰 자동 확장 */
+  white-space: nowrap; /* 줄바꿈 방지 -> 글자 안 잘림 */
+  background: rgba(102, 102, 102, 0.7);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.personalBox .depth_1 a {
+  display: block;
+  padding: 8px 12px; /* 항목 높이/여백 확대 */
+  color: #fff;
+}
+
+button {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  border: #333;
+}
