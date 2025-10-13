@@ -612,6 +612,8 @@ CREATE TABLE CERTIFICATE (
    CERT_EXP DATE NOT NULL
 );*/
 
+select * from member;
+
 CREATE TABLE request (
   request_no INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(200) NOT NULL,
